@@ -39,7 +39,7 @@ module.exports.addHomework = ash(async (req, res) => {
   await prisma.$disconnect();
 });
 
-// ~> Update single homework
+// ~> Update homework
 module.exports.updateHomework = ash(async (req, res) => {
   const { id } = req.params;
 

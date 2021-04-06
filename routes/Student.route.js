@@ -1,12 +1,18 @@
 const { Router } = require("express");
 
-const StudentsController = require("../controllers/Students.controller");
+const {
+  getAllStudents,
+  getStudentById,
+  addStudent,
+  updateStudent,
+} = require("../controllers/Students.controller");
 
 // ~~> Mounted as /students
 const route = Router();
 
-route.get("/", StudentsController.getAllStudents);
-route.get("/:id", StudentsController.getStudentById);
-route.post("/", StudentsController.addStudent);
+route.get("/", getAllStudents);
+route.get("/:id", getStudentById);
+route.put("/:id", updateStudent);
+route.post("/", addStudent);
 
 module.exports = route;

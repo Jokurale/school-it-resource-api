@@ -1,9 +1,13 @@
-const subjectValidator = require("../validators/Subject.validator");
+const { createSchema, updateSchema } = require("../schemas/Subject.schema");
 
-const subjectPreparator = async (user) => {
-  // Validate incoming data from controller
-  const valid = await subjectValidator(user);
+const subjectPreparator = async (subject, mode = "create") => {
+  // Await validation based on operation's mode
+  const valid =
+    mode == "create"
+      ? await createSchema.validateAsync(subject)
+      : await updateSchema.validateAsync(subject);
 
+  // Prepare database query
   const databaseReadySubject = {
     data: {
       ...valid,

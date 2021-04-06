@@ -9,6 +9,8 @@ module.exports.UnifyError = (res, err) => {
   // *** Define error source (JOI schema validation, prisma database)
   res.status(err.status || 400);
 
+  console.log(err);
+
   if (err.hasOwnProperty("message") && !err.hasOwnProperty("meta")) {
     console.log(chalk.redBright("Generic error has been thrown."));
     res.json({ error: err.message });
@@ -17,6 +19,10 @@ module.exports.UnifyError = (res, err) => {
 
   // Prisma database
   if (err.hasOwnProperty("meta")) {
+    if (err.code === "P2003")
+      res.json({
+        error: "Invalid relation field's value, foregin keys must exist.",
+      });
     console.log(chalk.redBright("Prisma database error has been thrown."));
     res.json({ error: err.meta.cause });
     return;

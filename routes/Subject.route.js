@@ -2,6 +2,7 @@ const { Router } = require("express");
 
 const {
   getAllSubjects,
+  getSubjectById,
   addSubject,
   removeSubject,
   updateSubject,
@@ -11,6 +12,7 @@ const {
 const route = Router();
 
 route.get("/", getAllSubjects);
+route.get("/:id", getSubjectById);
 route.post("/", addSubject);
 route.delete("/:id", removeSubject);
 route.put("/:id", updateSubject);

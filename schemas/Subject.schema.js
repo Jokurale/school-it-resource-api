@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const schema = Joi.object({
+const createSchema = Joi.object({
   name: Joi.string().max(150).min(5).required(),
 })
   .required()
@@ -8,4 +8,8 @@ const schema = Joi.object({
     "object.base": "Supply valid subject data.",
   });
 
-module.exports = schema;
+const updateSchema = Joi.object({
+  name: Joi.string().max(150).min(5),
+});
+
+module.exports = { createSchema, updateSchema };

@@ -1,16 +1,13 @@
-const homeworkValidator = require("../validators/Homework.validator");
+const { createSchema, updateSchema } = require("../schemas/Homework.schema");
 
-const homeworkPreparator = async (homework, type = "create") => {
-  const VALID_TYPES = ["create", "update"];
+const homeworkPreparator = async (homework, mode = "create") => {
+  // Await validation based on operation's mode
+  const valid =
+    mode == "create"
+      ? await createSchema.validateAsync(homework)
+      : await updateSchema.validateAsync(homework);
 
-  if (!VALID_TYPES.includes(type))
-    throw TypeError(
-      `Invalid type supplied for validator. Expected 'create' or 'update', '${type}' given. `
-    );
-
-  // Validate incoming data from controller
-  const valid = await homeworkValidator(homework, type);
-
+  // Prepare database query
   const databaseReadyHomework = {
     data: {
       ...valid,
