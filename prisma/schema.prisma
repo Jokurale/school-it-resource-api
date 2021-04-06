@@ -176,7 +176,7 @@ model homework {
 
 model room {
   id     String @id @default(uuid())
-  number String @db.VarChar(10)
+  number String @db.VarChar(10) @unique
   type   String @db.VarChar(255)
 
   @@map("Rooms")

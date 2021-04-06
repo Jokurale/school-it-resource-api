@@ -19,12 +19,25 @@ module.exports.UnifyError = (res, err) => {
 
   // Prisma database
   if (err.hasOwnProperty("meta")) {
-    if (err.code === "P2003")
-      res.json({
-        error: "Invalid relation field's value, foregin keys must exist.",
-      });
+    let message;
+
+    // Handle various database errors
+    switch (err.code) {
+      case "P2003":
+        message = "Invalid relation field's value, foregin keys must exist.";
+        break;
+      case "P2002":
+        message = "Already exists";
+        break;
+
+      default:
+        message = err.meta.cause;
+    }
+
     console.log(chalk.redBright("Prisma database error has been thrown."));
-    res.json({ error: err.meta.cause });
+
+    res.json({ error: message });
+
     return;
   }
 
