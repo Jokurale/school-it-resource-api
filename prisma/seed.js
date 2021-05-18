@@ -99,15 +99,8 @@ const randomLesson = async () => {
 
 async function main() {
   for (const user of DefaultUsers) {
-    const {
-      firstname,
-      lastname,
-      dateOfBirth,
-      email,
-      login,
-      password,
-      role,
-    } = user;
+    const { firstname, lastname, dateOfBirth, email, login, password, role } =
+      user;
 
     const _date = toMySQLDate(dateOfBirth);
 
@@ -149,44 +142,46 @@ async function main() {
 
   // *** Random 100 students
   console.log(chalk.cyan(`Seeding students...`));
+  await (async () => {
+    for (let index = 0; index < 100; index++) {
+      // const _hash = await hash(faker.internet.password());
+      const _hash = await hash("P@ssw0rd");
+      const _date = toMySQLDate(faker.date.past());
+      const login = (
+        faker.name.firstName() +
+        faker.name.lastName() +
+        randomInt(1, 50)
+      ).toLowerCase();
 
-  for (let index = 0; index < 100; index++) {
-    const _hash = await hash(faker.internet.password());
-    const _date = toMySQLDate(faker.date.past());
-    const login = (
-      faker.name.firstName() +
-      faker.name.lastName() +
-      randomInt(1, 50)
-    ).toLowerCase();
-
-    await prisma.user.create({
-      data: {
-        credential: {
-          create: {
-            login,
-            password: _hash,
+      await prisma.user.create({
+        data: {
+          credential: {
+            create: {
+              login,
+              password: _hash,
+            },
           },
-        },
 
-        personalInfo: {
-          create: {
-            firstname: faker.name.firstName(),
-            lastname: faker.name.lastName(),
-            email: faker.internet.email(),
-            dateOfBirth: _date,
-            address: {
-              create: {
-                ...randomAddress(),
+          personalInfo: {
+            create: {
+              firstname: faker.name.firstName(),
+              lastname: faker.name.lastName(),
+              email: faker.internet.email(),
+              dateOfBirth: _date,
+              address: {
+                create: {
+                  ...randomAddress(),
+                },
               },
             },
           },
+          student: {
+            create: {},
+          },
         },
-        student: {
-          create: {},
-        },
-      },
-    });
-  }
+      });
+    }
+  })();
 
   // *** Random 50 teachers
   console.log(chalk.cyan(`Seeding teachers...`));

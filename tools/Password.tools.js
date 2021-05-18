@@ -8,8 +8,4 @@ async function hash(password) {
   return await bcrypt.hash(password.trim() + salt, 10);
 }
 
-async function verify(password, hash) {
-  return await bcrypt.compare(password.trim() + salt, hash);
-}
-
-module.exports = { hash, verify };
+module.exports = { hash };
