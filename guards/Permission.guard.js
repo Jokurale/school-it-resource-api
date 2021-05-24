@@ -4,6 +4,8 @@
  *
  */
 
+const ash = require("express-async-handler");
+
 const { verify } = require("../tools/Token.tools");
 const {
   generateRestrictions,
@@ -17,7 +19,7 @@ const {
   INSUFFICIENT_PERMISSIONS,
 } = require("../tools/Error.messages");
 
-module.exports = (req, res, next) => {
+module.exports = ash(async (req, res, next) => {
   const token =
     req.headers.authorization && req.headers.authorization.split(" ")[1];
 
@@ -37,9 +39,9 @@ module.exports = (req, res, next) => {
   req.role = role;
 
   // *** Setup path(s) for which user is permitted to request
-  const restrictions = generateRestrictions(role, id);
+  const restrictions = await generateRestrictions(role, id);
 
   // *** Proceed when everything is fine or throw an error
   if (isPermitted(req, restrictions)) next();
   else return PrettyError(res, INSUFFICIENT_PERMISSIONS);
-};
+});

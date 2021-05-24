@@ -1,17 +1,29 @@
-module.exports.generateRestrictions = (rank, id) => {
+const { userIdtoStudentId } = require("./ID.mapper.tools");
+
+module.exports.generateRestrictions = async (rank, userId) => {
   // *** Nullish/false restrictions means user hasn't been restricted in anyway.
+
+  const id = await userIdtoStudentId(userId);
+
   let restrictions = {
-    isRestricted: false,
+    isRestricted: true,
   };
+
+  if (rank === "administrator") {
+    restrictions = {
+      isRestricted: false,
+    };
+  }
 
   // ~> Student Restrictions
   if (rank === "student") {
     restrictions = {
-      isRestricted: true,
+      // Inherit default restrictions
+      ...restrictions,
       paths: [
         {
-          path: `/users/${id}`,
-          methods: ["GET", "PUT"],
+          path: `/students/${id}`,
+          methods: ["GET"],
         },
         // ? Example usage
         // {
@@ -42,9 +54,7 @@ module.exports.isPermitted = (req, restrictions) => {
     paths.forEach((pathset) => {
       const { path, methods } = pathset;
 
-      console.log(methods.includes(requestedMethod));
-
-      if (methods.includes(requestedMethod) && requestedPath == path) {
+      if (methods.includes(requestedMethod) && requestedPath === path) {
         result = true;
         throw Break;
       }

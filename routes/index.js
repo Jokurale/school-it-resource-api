@@ -3,7 +3,7 @@ const express = require("express");
 
 const router = express.Router();
 
-// const PermissionGuard = require("../guards/PermissionGuard");
+const Permissions = require("../guards/Permission.guard");
 
 // ** All needed routes
 const StudentRoute = require("../routes/Student.route");
@@ -15,6 +15,9 @@ const RoomRoute = require("../routes/Room.route");
 
 // ! Route setup
 router.use("/auth", SpecialRoute);
+
+router.use("*", Permissions);
+
 router.use("/subjects", SubjectRoute);
 router.use("/students", StudentRoute);
 router.use("/homeworks", HomeworkRoute);

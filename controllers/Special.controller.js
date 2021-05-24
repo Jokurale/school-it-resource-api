@@ -17,6 +17,7 @@ module.exports.getCredentialsByLogin = async (req, res) => {
       },
       include: {
         credential: true,
+        student: true,
       },
     });
 
