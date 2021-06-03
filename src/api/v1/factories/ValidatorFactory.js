@@ -1,7 +1,7 @@
 class ValidatorFactory {
   /**
    * Create new validator factory
-   * @param {ValidationSchema} validationSchema - Validation schema using which validator function will rely on
+   * @param {ValidationSchema} validationSchema - Validation schema which genereted function will rely on
    */
 
   constructor(validationSchema) {
