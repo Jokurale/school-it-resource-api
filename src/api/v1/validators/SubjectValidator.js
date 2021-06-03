@@ -1,21 +1,9 @@
 const { SubjectSchema } = require("../schemas");
-const { createSchema, updateSchema } = SubjectSchema;
 
-const validateSubject = async (subject, mode = "create") => {
-  // Await validation based on operation's mode
-  const valid =
-    mode == "create"
-      ? await createSchema.validateAsync(subject)
-      : await updateSchema.validateAsync(subject);
+const { ValidatorFactory } = require("../factories");
 
-  // Prepare database query
-  const databaseReadySubject = {
-    data: {
-      ...valid,
-    },
-  };
+const factory = new ValidatorFactory(SubjectSchema);
 
-  return databaseReadySubject;
-};
+const { validator: validateSubject } = factory.getServiceFunctions();
 
 module.exports = validateSubject;

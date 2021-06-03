@@ -1,21 +1,9 @@
 const { HomeworkSchema } = require("../schemas");
-const { createSchema, updateSchema } = HomeworkSchema;
 
-const validateHomework = async (address, mode = "create") => {
-  // Await validation based on operation's mode
-  const valid =
-    mode == "create"
-      ? await createSchema.validateAsync(address)
-      : await updateSchema.validateAsync(address);
+const { ValidatorFactory } = require("../factories");
 
-  // Prepare database query
-  const databaseReadyHomework = {
-    data: {
-      ...valid,
-    },
-  };
+const factory = new ValidatorFactory(HomeworkSchema);
 
-  return databaseReadyHomework;
-};
+const { validator: validateHomework } = factory.getServiceFunctions();
 
 module.exports = validateHomework;

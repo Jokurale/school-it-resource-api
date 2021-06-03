@@ -1,21 +1,9 @@
 const { AddressSchema } = require("../schemas");
-const { createSchema, updateSchema } = AddressSchema;
 
-const validateAddress = async (address, mode = "create") => {
-  // Await validation based on operation's mode
-  const valid =
-    mode == "create"
-      ? await createSchema.validateAsync(address)
-      : await updateSchema.validateAsync(address);
+const { ValidatorFactory } = require("../factories");
 
-  // Prepare database query
-  const databaseReadyAddress = {
-    data: {
-      ...valid,
-    },
-  };
+const factory = new ValidatorFactory(AddressSchema);
 
-  return databaseReadyAddress;
-};
+const { validator: validateAddress } = factory.getServiceFunctions();
 
 module.exports = validateAddress;

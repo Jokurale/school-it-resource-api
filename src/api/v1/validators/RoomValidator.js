@@ -1,21 +1,9 @@
-const { RoomSchema } = require("../schemas/");
-const { createSchema, updateSchema } = RoomSchema;
+const { RoomSchema } = require("../schemas");
 
-const validateRoom = async (room, mode = "create") => {
-  // Await validation based on operation's mode
-  const valid =
-    mode == "create"
-      ? await createSchema.validateAsync(room)
-      : await updateSchema.validateAsync(room);
+const { ValidatorFactory } = require("../factories");
 
-  // Prepare database query
-  const databaseReadyRoom = {
-    data: {
-      ...valid,
-    },
-  };
+const factory = new ValidatorFactory(RoomSchema);
 
-  return databaseReadyRoom;
-};
+const { validator: validateRoom } = factory.getServiceFunctions();
 
 module.exports = validateRoom;
