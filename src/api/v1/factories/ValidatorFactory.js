@@ -1,6 +1,6 @@
 class ValidatorFactory {
   /**
-   * Create new validator factory (CRUD operations factory)
+   * Create new validator factory
    * @param {ValidationSchema} validationSchema - Validation schema using which validator function will rely on
    */
 
