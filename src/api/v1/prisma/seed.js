@@ -3,13 +3,17 @@ const prisma = new PrismaClient();
 
 const faker = require("faker");
 
-const { hash } = require("../tools/Password.tools");
+const {
+  PasswordHelper: { hash },
+} = require("../helpers");
 
 const chalk = require("chalk");
 
-const DefaultUsers = require("../DefaultUsers");
+const DefaultUsers = require("../../../../DefaultUsers");
 
-const { toMySQLDate } = require("../tools/Date.tools");
+const {
+  DateHelper: { toMySQLDate },
+} = require("../helpers");
 
 const randomAddress = () => ({
   address1: faker.address.streetAddress(),

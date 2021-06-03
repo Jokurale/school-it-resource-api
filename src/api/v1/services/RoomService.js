@@ -2,7 +2,7 @@ const { PrismaClient } = require("@prisma/client");
 const { validateRoom } = require("../validators");
 const prisma = new PrismaClient();
 
-const { ServiceFactory } = require("../helpers");
+const { ServiceFactory } = require("../factories");
 
 const factory = new ServiceFactory(prisma, validateRoom, "room");
 
