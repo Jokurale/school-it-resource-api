@@ -5,14 +5,20 @@ const PrettyError = (res, { code, message }) => {
   return;
 };
 
+require("dotenv").config();
+
+const consoleOutput = process.env.NODE_ENV !== "testing";
+
 const UnifyError = (res, err) => {
   // *** Define error source (JOI schema validation, prisma database)
   res.status(err.status || 400);
 
-  console.log(err);
+  if (consoleOutput) console.log(err);
 
   if (err.hasOwnProperty("message") && !err.hasOwnProperty("meta")) {
-    console.log(chalk.redBright("Generic error has been thrown."));
+    if (consoleOutput)
+      console.log(chalk.redBright("Generic error has been thrown."));
+
     res.json({ error: err.message });
     return;
   }
@@ -34,7 +40,8 @@ const UnifyError = (res, err) => {
         message = err.meta.cause;
     }
 
-    console.log(chalk.redBright("Prisma database error has been thrown."));
+    if (consoleOutput)
+      console.log(chalk.redBright("Prisma database error has been thrown."));
 
     res.json({ error: message });
 
@@ -43,7 +50,9 @@ const UnifyError = (res, err) => {
 
   // JOI schema
   if (err.hasOwnProperty("details")) {
-    console.log(chalk.redBright("JOI schema error has been thrown."));
+    if (consoleOutput)
+      console.log(chalk.redBright("JOI schema error has been thrown."));
+
     res.json({ error: err.details.message });
     return;
   }

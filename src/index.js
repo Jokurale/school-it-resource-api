@@ -25,7 +25,7 @@ app.use(
 // *** Addons
 app.use(require("body-parser").urlencoded({ extended: true }));
 app.use(require("body-parser").json());
-app.use(require("morgan")("dev"));
+if (process.env.NODE_ENV !== "testing") app.use(require("morgan")("dev"));
 app.use(require("helmet")());
 
 // *** Invalid JSON prevention
@@ -43,16 +43,18 @@ app.use((req, res, next) => {
 
 // *** Sync/Async error resolver
 app.use((error, req, res, next) => {
-  console.log(error);
-
   return UnifyError(res, error);
 });
 
 // *** App Starter
 app.listen(process.env.DEV_PORT || 5000, () => {
-  console.log(
-    `[API] School managment API is up and running on port ${
-      process.env.DEV_PORT || 5000
-    }.`
-  );
+  if (process.env.NODE_ENV !== "testing")
+    console.log(
+      `[API] School managment API is up and running on port ${
+        process.env.DEV_PORT || 5000
+      }.`
+    );
 });
+
+// App purposes
+module.exports = app;
