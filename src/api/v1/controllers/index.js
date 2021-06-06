@@ -4,6 +4,7 @@ const SubjectController = require("./SubjectController");
 const HomeworkController = require("./HomeworkController");
 const SpecialController = require("./SpecialController");
 const MarkController = require("./MarkController");
+const PersonalInfoController = require("./PersonalInfoController");
 
 module.exports = {
   AddressController,
@@ -12,4 +13,5 @@ module.exports = {
   HomeworkController,
   SpecialController,
   MarkController,
+  PersonalInfoController,
 };

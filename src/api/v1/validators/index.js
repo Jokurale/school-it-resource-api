@@ -3,6 +3,7 @@ const validateRoom = require("./RoomValidator");
 const validateSubject = require("./SubjectValidator");
 const validateHomework = require("./HomeworkValidator");
 const validateMark = require("./MarkValidator");
+const validatePersonalInfo = require("./PersonalInfoValidator");
 
 module.exports = {
   validateAddress,
@@ -10,4 +11,5 @@ module.exports = {
   validateSubject,
   validateHomework,
   validateMark,
+  validatePersonalInfo,
 };

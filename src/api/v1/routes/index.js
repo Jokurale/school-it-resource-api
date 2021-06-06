@@ -12,6 +12,7 @@ const HomeworkRoute = require("./HomeworkRoute");
 const AddressRoute = require("./AddressRoute");
 const RoomRoute = require("./RoomRoute");
 const MarkRoute = require("./MarkRoute");
+const PersonalInfoRoute = require("./PersonalInfoRoute");
 
 // ! Route setup
 router.use("/auth", SpecialRoute);
@@ -23,5 +24,6 @@ router.use("/homeworks", HomeworkRoute);
 router.use("/addresses", AddressRoute);
 router.use("/rooms", RoomRoute);
 router.use("/marks", MarkRoute);
+router.use("/personalinfos", PersonalInfoRoute);
 
 module.exports = router;
