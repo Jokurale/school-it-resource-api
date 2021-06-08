@@ -14,14 +14,15 @@ const AddressRoute = require("./AddressRoute");
 const RoomRoute = require("./RoomRoute");
 const MarkRoute = require("./MarkRoute");
 const PersonalInfoRoute = require("./PersonalInfoRoute");
+const UserRoute = require("./UserRoute");
 
 // ! Route setup
 router.use("/auth", SpecialRoute);
 
 // router.use("*", Permissions);
-router.use(TokenMiddleware.TokenInRequest);
-router.use(TokenMiddleware.TokenIsValid);
-router.use(TokenMiddleware.AttachTokenData);
+//router.use(TokenMiddleware.TokenInRequest);
+// router.use(TokenMiddleware.TokenIsValid);
+// router.use(TokenMiddleware.AttachTokenData);
 
 router.use("/subjects", SubjectRoute);
 router.use("/homeworks", HomeworkRoute);
@@ -29,5 +30,6 @@ router.use("/addresses", AddressRoute);
 router.use("/rooms", RoomRoute);
 router.use("/marks", MarkRoute);
 router.use("/personalinfos", PersonalInfoRoute);
+router.use("/users", UserRoute);
 
 module.exports = router;

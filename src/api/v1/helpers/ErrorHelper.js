@@ -19,8 +19,7 @@ const UnifyError = (res, err) => {
     if (consoleOutput)
       console.log(chalk.redBright("Generic error has been thrown."));
 
-    res.json({ error: err.message });
-    return;
+    return res.json({ error: err.message });
   }
 
   // Prisma database
@@ -33,7 +32,11 @@ const UnifyError = (res, err) => {
         message = "Invalid relation field's value, foregin keys must exist.";
         break;
       case "P2002":
-        message = "Already exists";
+        message = "Already exists.";
+        break;
+
+      case "P2014":
+        message = "Action would violate table's relations.";
         break;
 
       default:
@@ -43,9 +46,7 @@ const UnifyError = (res, err) => {
     if (consoleOutput)
       console.log(chalk.redBright("Prisma database error has been thrown."));
 
-    res.json({ error: message });
-
-    return;
+    return res.json({ error: message });
   }
 
   // JOI schema
@@ -53,12 +54,10 @@ const UnifyError = (res, err) => {
     if (consoleOutput)
       console.log(chalk.redBright("JOI schema error has been thrown."));
 
-    res.json({ error: err.details.message });
-    return;
+    return res.json({ error: err.details.message });
   }
 
-  res.json({ error: err });
-  return;
+  return res.json({ error: err });
 };
 
 module.exports = {

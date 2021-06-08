@@ -336,7 +336,7 @@ async function main() {
     }
   }
 
-  // *** Marks (generate + asing teacher, subject, student)
+  // *** Marks (generate + assign teacher, subject, student)
   console.log(chalk.cyan(`Seeding marks...`));
 
   for (let index = 0; index < 200; index++) {

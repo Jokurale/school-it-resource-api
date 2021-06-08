@@ -4,6 +4,8 @@ const SubjectSchema = require("./SubjectSchema");
 const HomeworkSchema = require("./HomeworkSchema");
 const MarkSchema = require("./MarkSchema");
 const PersonalInfoSchema = require("./PersonalInfoSchema");
+const UserSchema = require("./UserSchema");
+const CredentialSchema = require("./CredentialSchema");
 
 module.exports = {
   AddressSchema,
@@ -12,4 +14,6 @@ module.exports = {
   HomeworkSchema,
   MarkSchema,
   PersonalInfoSchema,
+  UserSchema,
+  CredentialSchema,
 };

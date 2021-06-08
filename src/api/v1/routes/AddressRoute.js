@@ -10,7 +10,7 @@ const {
   removeAddress,
 } = AddressController;
 
-// ~~> Mounted as /homeworks
+// ~~> Mounted as /addresses
 const route = Router();
 
 route.get("/", getAllAddresses);

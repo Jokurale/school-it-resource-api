@@ -1,9 +1,13 @@
 const Joi = require("joi");
 
+const CredentialSchema = require("./CredentialSchema");
+const PersonalInfoSchema = require("./PersonalInfoSchema");
+const AddressSchema = require("./AddressSchema");
+
 const createSchema = Joi.object({
-  credential: Joi.object().required(),
-  personalInfo: Joi.object().required(),
-  address: Joi.array().required(),
+  credential: CredentialSchema.createSchema,
+  personalInfo: PersonalInfoSchema.createSchema,
+  address: AddressSchema.createSchema,
 });
 
 module.exports = { createSchema };
