@@ -4,6 +4,7 @@ const express = require("express");
 const router = express.Router();
 
 // const Permissions = require("../guards/Permission.guard");
+const { TokenMiddleware } = require("../middlewares");
 
 // ** All needed routes
 const SpecialRoute = require("./SpecialRoute");
@@ -18,6 +19,9 @@ const PersonalInfoRoute = require("./PersonalInfoRoute");
 router.use("/auth", SpecialRoute);
 
 // router.use("*", Permissions);
+router.use(TokenMiddleware.TokenInRequest);
+router.use(TokenMiddleware.TokenIsValid);
+router.use(TokenMiddleware.AttachTokenData);
 
 router.use("/subjects", SubjectRoute);
 router.use("/homeworks", HomeworkRoute);
