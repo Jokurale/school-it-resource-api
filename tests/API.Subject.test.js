@@ -1,11 +1,10 @@
+process.env.NODE_ENV = "testing";
 const app = require("../src");
 
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 
 const expect = chai.expect;
-
-process.env.NODE_ENV = "testing";
 
 chai.use(chaiHttp);
 
