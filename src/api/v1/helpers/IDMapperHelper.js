@@ -27,7 +27,7 @@ const symbolToGroupId = async (symbol) => {
 
   // Group does not exist
   if (!group)
-    throw new Error(`Group with given symgol (${symbol}) - does not exist. `);
+    throw new Error(`Group with given symbol (${symbol}) does not exist. `);
 
   return group.id;
 };
