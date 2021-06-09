@@ -6,11 +6,13 @@ const SpecialController = require("./SpecialController");
 const MarkController = require("./MarkController");
 const PersonalInfoController = require("./PersonalInfoController");
 const UserController = require("./UserController");
+const StudentController = require("./StudentController");
 
 module.exports = {
   AddressController,
   RoomController,
   SubjectController,
+  StudentController,
   HomeworkController,
   SpecialController,
   MarkController,

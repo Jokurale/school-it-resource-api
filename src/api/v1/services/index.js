@@ -5,6 +5,7 @@ const HomeworkService = require("./HomeworkService");
 const MarkService = require("./MarkService");
 const PersonalInfoService = require("./PersonalInfoService");
 const UserService = require("./UserService");
+const StudentService = require("./StudentService");
 
 module.exports = {
   AddressService,
@@ -14,4 +15,5 @@ module.exports = {
   MarkService,
   PersonalInfoService,
   UserService,
+  StudentService,
 };
