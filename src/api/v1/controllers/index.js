@@ -7,9 +7,11 @@ const MarkController = require("./MarkController");
 const PersonalInfoController = require("./PersonalInfoController");
 const UserController = require("./UserController");
 const StudentController = require("./StudentController");
+const GroupController = require("./GroupController");
 
 module.exports = {
   AddressController,
+  GroupController,
   RoomController,
   SubjectController,
   StudentController,

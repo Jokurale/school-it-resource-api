@@ -6,6 +6,7 @@ const MarkService = require("./MarkService");
 const PersonalInfoService = require("./PersonalInfoService");
 const UserService = require("./UserService");
 const StudentService = require("./StudentService");
+const GroupService = require("./GroupService");
 
 module.exports = {
   AddressService,
@@ -16,4 +17,5 @@ module.exports = {
   PersonalInfoService,
   UserService,
   StudentService,
+  GroupService,
 };
