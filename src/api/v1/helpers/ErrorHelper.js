@@ -1,8 +1,7 @@
 const chalk = require("chalk");
 
 const PrettyError = (res, { code, message }) => {
-  res.status(code).json({ error: message });
-  return;
+  return res.status(code).json({ error: message });
 };
 
 require("dotenv").config();

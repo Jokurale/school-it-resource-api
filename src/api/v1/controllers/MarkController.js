@@ -6,7 +6,7 @@ const ash = require("express-async-handler");
 const getAllMarks = ash(async (req, res) => {
   const allMarks = await MarkService.getAllMarks();
 
-  res.json(allMarks);
+  return res.json(allMarks);
 });
 
 // ~> Get specified mark
@@ -15,7 +15,7 @@ const getMarkById = ash(async (req, res) => {
 
   const mark = await MarkService.getMarkById(markId);
 
-  res.json(mark);
+  return res.json(mark);
 });
 
 // ~> Add mark
@@ -23,7 +23,7 @@ const addMark = ash(async (req, res) => {
   const result = await MarkService.addMark(req.body);
 
   if (result) res.status(201);
-  res.json(result);
+  return res.json(result);
 });
 
 // ~> Update mark
@@ -32,7 +32,7 @@ const updateMark = ash(async (req, res) => {
 
   const result = await MarkService.updateMark(id, req.body);
 
-  res.json(result);
+  return res.json(result);
 });
 
 // ~> Remove mark
@@ -41,7 +41,7 @@ const removeMark = ash(async (req, res) => {
 
   const result = await MarkService.removeMark(id);
 
-  res.json(result);
+  return res.json(result);
 });
 
 module.exports = {

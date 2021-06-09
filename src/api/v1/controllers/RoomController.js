@@ -6,7 +6,7 @@ const ash = require("express-async-handler");
 const getAllRooms = ash(async (req, res) => {
   const allRooms = await RoomService.getAllRooms();
 
-  res.json(allRooms);
+  return res.json(allRooms);
 });
 
 // ~> Get specified room
@@ -15,7 +15,7 @@ const getRoomById = ash(async (req, res) => {
 
   const room = await RoomService.getRoomById(roomId);
 
-  res.json(room);
+  return res.json(room);
 });
 
 // ~> Add room
@@ -23,7 +23,7 @@ const addRoom = ash(async (req, res) => {
   const result = await RoomService.addRoom(req.body);
 
   if (result) res.status(201);
-  res.json(result);
+  return res.json(result);
 });
 
 // ~> Update room
@@ -32,7 +32,7 @@ const updateRoom = ash(async (req, res) => {
 
   const result = await RoomService.updateRoom(id, req.body);
 
-  res.json(result);
+  return res.json(result);
 });
 
 // ~> Remove room
@@ -41,7 +41,7 @@ const removeRoom = ash(async (req, res) => {
 
   const result = await RoomService.removeRoom(id);
 
-  res.json(result);
+  return res.json(result);
 });
 
 module.exports = {

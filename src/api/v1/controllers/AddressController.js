@@ -6,7 +6,7 @@ const ash = require("express-async-handler");
 const getAllAddresses = ash(async (req, res) => {
   const allAddresses = await AddressService.getAllAddresses();
 
-  res.json(allAddresses);
+  return res.json(allAddresses);
 });
 
 // ~> Get specified address
@@ -15,7 +15,7 @@ const getAddressById = ash(async (req, res) => {
 
   const address = await AddressService.getAddressById(addressId);
 
-  res.json(address);
+  return res.json(address);
 });
 
 // ~> Add address
@@ -23,7 +23,7 @@ const addAddress = ash(async (req, res) => {
   const result = await AddressService.addAddress(req.body);
 
   if (result) res.status(201);
-  res.json(result);
+  return res.json(result);
 });
 
 // ~> Update address
@@ -32,7 +32,7 @@ const updateAddress = ash(async (req, res) => {
 
   const result = await AddressService.updateAddress(id, req.body);
 
-  res.json(result);
+  return res.json(result);
 });
 
 // ~> Remove address
@@ -41,7 +41,7 @@ const removeAddress = ash(async (req, res) => {
 
   const result = await AddressService.removeAddress(id);
 
-  res.json(result);
+  return res.json(result);
 });
 
 module.exports = {

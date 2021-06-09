@@ -19,8 +19,8 @@ module.exports.getCredentialsByLogin = async (req, res) => {
       },
     });
 
-    res.json(user);
+    return res.json(user);
   } catch {
-    res.json({ error: "Credentials error" });
+    return res.json({ error: "Credentials error" });
   }
 };

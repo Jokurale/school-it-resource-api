@@ -6,7 +6,7 @@ const ash = require("express-async-handler");
 const getAllHomeworks = ash(async (req, res) => {
   const allHomeworks = await HomeworkService.getAllHomeworks();
 
-  res.json(allHomeworks);
+  return res.json(allHomeworks);
 });
 
 // ~> Get specified homework
@@ -15,7 +15,7 @@ const getHomeworkById = ash(async (req, res) => {
 
   const Homework = await HomeworkService.getHomeworkById(HomeworkId);
 
-  res.json(Homework);
+  return res.json(Homework);
 });
 
 // ~> Add homework
@@ -23,7 +23,7 @@ const addHomework = ash(async (req, res) => {
   const result = await HomeworkService.addHomework(req.body);
 
   if (result) res.status(201);
-  res.json(result);
+  return res.json(result);
 });
 
 // ~> Update homework
@@ -32,7 +32,7 @@ const updateHomework = ash(async (req, res) => {
 
   const result = await HomeworkService.updateHomework(id, req.body);
 
-  res.json(result);
+  return res.json(result);
 });
 
 // ~> Remove homework
@@ -41,7 +41,7 @@ const removeHomework = ash(async (req, res) => {
 
   const result = await HomeworkService.removeHomework(id);
 
-  res.json(result);
+  return res.json(result);
 });
 
 module.exports = {
