@@ -22,8 +22,6 @@ const getUserById = ash(async (req, res) => {
 const addUser = ash(async (req, res) => {
   const result = await UserService.addUser(req.body);
 
-  console.log(result);
-
   if (result) res.status(201);
   return res.json(result);
 });

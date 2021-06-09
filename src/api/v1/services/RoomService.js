@@ -1,6 +1,6 @@
-const { PrismaClient } = require("@prisma/client");
+const { prisma } = require("../database");
+
 const { validateRoom } = require("../validators");
-const prisma = new PrismaClient();
 
 const { ServiceFactory } = require("../factories");
 

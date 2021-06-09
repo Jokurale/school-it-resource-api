@@ -1,5 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const { prisma } = require("../database");
 
 const userIdtoStudentId = async (userId) => {
   const result = await prisma.student.findFirst({
