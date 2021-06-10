@@ -80,7 +80,7 @@ const addUser = async (user) => {
   console.log(validUserData);
 
   const hashedPassword = await hash(credential.password);
-  const sqlDateOfBirth = await toMySQLDate(personalInfo.dateOfBirth);
+  const sqlDateOfBirth = toMySQLDate(personalInfo.dateOfBirth);
 
   const databaseReadyUser = {
     data: {
