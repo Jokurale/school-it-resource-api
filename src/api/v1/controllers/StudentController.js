@@ -69,7 +69,6 @@ module.exports = {
   getAllStudents,
   getStudentById,
   getStudentsAddresses,
-  getStudentsHomeworks,
   getStudentsMarks,
   getStudentsPersonalInfo,
   getStudentsGroup,
