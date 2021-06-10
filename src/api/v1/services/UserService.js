@@ -235,9 +235,41 @@ const removeUser = async (id) => {
   return transactionResults;
 };
 
+const getPersonalInfo = async (userId) => {
+  const personalInfo = await prisma.user.findFirst({
+    where: {
+      id: userId,
+    },
+    select: {
+      personalInfo: true,
+    },
+  });
+
+  return personalInfo;
+};
+
+const getAddresses = async (userId) => {
+  const addresses = await prisma.user.findFirst({
+    where: {
+      id: userId,
+    },
+    select: {
+      personalInfo: {
+        select: {
+          address: true,
+        },
+      },
+    },
+  });
+
+  return addresses;
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
   addUser,
   removeUser,
+  getAddresses,
+  getPersonalInfo,
 };

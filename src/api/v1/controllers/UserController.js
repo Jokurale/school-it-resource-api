@@ -35,9 +35,27 @@ const removeUser = ash(async (req, res) => {
   return res.json(result);
 });
 
+const getUsersAddresses = ash(async (req, res) => {
+  const { id: userId } = req.params;
+
+  const addresses = await UserService.getAddresses(userId);
+
+  return res.json(addresses);
+});
+
+const getUsersPersonalInfo = ash(async (req, res) => {
+  const { id: userId } = req.params;
+
+  const personalInfo = await UserService.getPersonalInfo(userId);
+
+  return res.json(personalInfo);
+});
+
 module.exports = {
   getAllUsers,
   getUserById,
   addUser,
   removeUser,
+  getUsersAddresses,
+  getUsersPersonalInfo,
 };
