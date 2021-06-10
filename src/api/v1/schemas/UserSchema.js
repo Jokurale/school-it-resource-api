@@ -7,7 +7,7 @@ const AddressSchema = require("./AddressSchema");
 const createSchema = Joi.object({
   credential: CredentialSchema.createSchema,
   personalInfo: PersonalInfoSchema.createSchema,
-  address: AddressSchema.createSchema,
+  address: AddressSchema.createManySchema,
 });
 
 module.exports = { createSchema };

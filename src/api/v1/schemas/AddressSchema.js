@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const createSingleSchema = Joi.object({
+const createSchema = Joi.object({
   address1: Joi.string().max(150).required(),
   address2: Joi.string().max(150),
   address3: Joi.string().max(150),
@@ -8,12 +8,13 @@ const createSingleSchema = Joi.object({
   state: Joi.string().max(50).required(),
   country: Joi.string().max(50).required(),
   postalCode: Joi.string().max(10).required(),
+  personalInfoId: Joi.string().length(36).required(),
 }).required();
 
-const createSchema = Joi.array()
+const createManySchema = Joi.array()
   .min(1)
   .max(3)
-  .items(createSingleSchema)
+  .items(createSchema)
   .required();
 
 const updateSchema = Joi.object({
@@ -26,4 +27,4 @@ const updateSchema = Joi.object({
   postalCode: Joi.string().max(10),
 });
 
-module.exports = { createSchema, updateSchema };
+module.exports = { createSchema, updateSchema, createManySchema };
