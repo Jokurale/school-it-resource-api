@@ -136,7 +136,7 @@ class TestFactory {
 
   setupPutTests() {
     const genericPutTestCase = () => {
-      let putData;
+      let putData = {};
 
       this.updateParams.forEach(
         (param) => (putData[param.paramName] = param.validValue)
