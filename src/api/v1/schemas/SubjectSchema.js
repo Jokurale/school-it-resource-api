@@ -2,11 +2,7 @@ const Joi = require("joi");
 
 const createSchema = Joi.object({
   name: Joi.string().max(150).min(5).required(),
-})
-  .required()
-  .messages({
-    "object.base": "Supply valid subject data.",
-  });
+}).required();
 
 const updateSchema = Joi.object({
   name: Joi.string().max(150).min(5),
