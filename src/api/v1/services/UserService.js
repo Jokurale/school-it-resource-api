@@ -77,8 +77,6 @@ const addUser = async (user) => {
 
   const { personalInfo, credential, address } = validUserData;
 
-  console.log(validUserData);
-
   const hashedPassword = await hash(credential.password);
   const sqlDateOfBirth = toMySQLDate(personalInfo.dateOfBirth);
 
