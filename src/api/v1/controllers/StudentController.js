@@ -1,7 +1,5 @@
 const { StudentService } = require("../services");
 
-const { validateGroup } = require("../validators");
-
 const ash = require("express-async-handler");
 
 const getAllStudents = ash(async (req, res) => {
@@ -61,11 +59,7 @@ const getStudentsGroup = ash(async (req, res) => {
 const assignStudentToGroup = ash(async (req, res) => {
   const { id: studentId } = req.params;
 
-  const {
-    data: { symbol },
-  } = await validateGroup(req.body);
-
-  const result = await StudentService.assignToGroup(studentId, symbol);
+  const result = await StudentService.assignToGroup(studentId, req.body);
 
   return res.json(result);
 });

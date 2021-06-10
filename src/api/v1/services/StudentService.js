@@ -1,5 +1,7 @@
 const { prisma } = require("../database");
 
+const { validateGroup } = require("../validators");
+
 const { IDMapperHelper } = require("../helpers");
 
 const getAllStudents = async () => {
@@ -95,8 +97,12 @@ const getGroup = async (studentId) => {
   return group;
 };
 
-const assignToGroup = async (studentId, groupSymbol) => {
-  const groupId = await IDMapperHelper.symbolToGroupId(groupSymbol);
+const assignToGroup = async (studentId, group) => {
+  const {
+    data: { symbol },
+  } = await validateGroup(group);
+
+  const groupId = await IDMapperHelper.symbolToGroupId(symbol);
 
   const result = await prisma.student.update({
     where: {
