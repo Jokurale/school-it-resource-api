@@ -1,4 +1,5 @@
 const chalk = require("chalk");
+const { ValidationError } = require("joi");
 
 const PrettyError = (res, { code, message }) => {
   return res.status(code).json({ error: message });
@@ -14,6 +15,15 @@ const UnifyError = (res, err) => {
 
   if (consoleOutput) console.log(err);
 
+  // JOI schema
+  if (err instanceof ValidationError) {
+    if (consoleOutput)
+      console.log(chalk.redBright("JOI schema error has been thrown."));
+
+    return res.json({ error: err.details.map((detail) => detail.message) });
+  }
+
+  // Generic
   if (err.hasOwnProperty("message") && !err.hasOwnProperty("meta")) {
     if (consoleOutput)
       console.log(chalk.redBright("Generic error has been thrown."));
@@ -46,14 +56,6 @@ const UnifyError = (res, err) => {
       console.log(chalk.redBright("Prisma database error has been thrown."));
 
     return res.json({ error: message });
-  }
-
-  // JOI schema
-  if (err.hasOwnProperty("details")) {
-    if (consoleOutput)
-      console.log(chalk.redBright("JOI schema error has been thrown."));
-
-    return res.json({ error: err.details.message });
   }
 
   return res.json({ error: err });
