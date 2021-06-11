@@ -105,7 +105,7 @@ class TestFactory {
     this.extraGetPaths?.forEach((path) =>
       this.tests.push(() => {
         describe(`GET ${this.path}/{id}${path} (shallow)`, () => {
-          it("Recieves valid response", (done) => {
+          it("Receives valid response", (done) => {
             chai
               .request(this.app)
               .get(`${this.path}/${this.tempId}${path}`)
