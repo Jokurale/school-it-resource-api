@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "test": "npx mocha .\\tests\\*.test.js -exit"
+    "test": "npx mocha .\\tests\\*.test.js -exit",
+    "testci": "npx mocha ./tests/*.test.js -exit"
   },
   "author": "Michał Podsiadły <podsiadly.michal@protonmail.com>",
   "license": "MIT",
