@@ -1,5 +1,7 @@
 // TODO: Beautify code
 
+const chalk = require("chalk");
+
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 
@@ -8,10 +10,18 @@ chai.use(chaiHttp);
 const expect = chai.expect;
 
 class TestFactory {
-  constructor(config = {}) {
+  constructor(
+    config = {
+      app: any,
+      moduleName: String,
+      path: String,
+      extraGetPaths: [],
+    }
+  ) {
     this.app = config?.app;
     this.moduleName = config?.moduleName;
     this.path = config?.path;
+    this.extraGetPaths = config?.extraGetPaths;
 
     this.tests = [];
     this.optionalParams = [];
@@ -91,6 +101,30 @@ class TestFactory {
     };
 
     this.tests.push(genericGetTestCase, IdGetTestCase);
+
+    this.extraGetPaths?.forEach((path) =>
+      this.tests.push(() => {
+        describe(`GET ${this.path}/{id}${path} (shallow)`, () => {
+          it("Recieves valid response", (done) => {
+            chai
+              .request(this.app)
+              .get(`${this.path}/${this.tempId}${path}`)
+              .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res).to.have.property("body");
+
+                expect(res.body).to.not.have.property("error");
+                expect(res.body).to.be.satisfy(
+                  (body) =>
+                    Array.isArray(body) ||
+                    (typeof body === "object" && body !== null)
+                );
+                done();
+              });
+          });
+        });
+      })
+    );
 
     return this;
   }
