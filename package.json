@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "test": "npx mocha .\\tests\\*.test.js -exit",
-    "testci": "npx mocha ./tests/*.test.js -exit"
+    "testci": "npx mocha ./tests/*.test.js -exit",
+    "genprisma": "cd ./src/api/v1 && npx prisma generate"
   },
   "author": "Michał Podsiadły <podsiadly.michal@protonmail.com>",
   "license": "MIT",
