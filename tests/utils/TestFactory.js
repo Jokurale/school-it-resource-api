@@ -1,7 +1,3 @@
-// TODO: Beautify code
-
-const chalk = require("chalk");
-
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 
@@ -227,7 +223,7 @@ class TestFactory {
   }
 
   registerParam(param) {
-    if (!param instanceof Param)
+    if (!(param instanceof Param))
       throw Error(
         `Invalid parameter class. Argument should be type of Param, '${param?.constructor?.name} given.'`
       );
