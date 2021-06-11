@@ -1,3 +1,5 @@
+// TODO: Beautify code
+
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 
@@ -19,15 +21,28 @@ class TestFactory {
 
     this.tempId;
 
-    this.registerOptionalParam = this.registerOptionalParam.bind(this);
-    this.registerRequiredParam = this.registerRequiredParam.bind(this);
-    this.registerResponseParam = this.registerResponseParam.bind(this);
-    this.registerUpdateParam = this.registerUpdateParam.bind(this);
+    this.registerParam = this.registerParam.bind(this);
+
+    this.runResponseParamsCheck = this.runResponseParamsCheck.bind(this);
+
     this.setupGetTests = this.setupGetTests.bind(this);
     this.setupPostTests = this.setupPostTests.bind(this);
     this.setupPutTests = this.setupPutTests.bind(this);
     this.setupDeleteTests = this.setupDeleteTests.bind(this);
+
     this.exec = this.exec.bind(this);
+  }
+
+  runResponseParamsCheck(baseObj) {
+    const cominbedParams = [
+      ...this.requiredParams,
+      ...this.optionalParams,
+      ...this.responseParams,
+    ];
+
+    cominbedParams.forEach((param) =>
+      expect(baseObj).to.have.property(param.paramName)
+    );
   }
 
   setupGetTests() {
@@ -40,16 +55,11 @@ class TestFactory {
             .end((err, res) => {
               expect(res).to.have.status(200);
               expect(res).to.have.property("body");
+
               expect(res.body).to.not.have.property("error");
               expect(res.body).to.be.an("array");
 
-              [
-                ...this.responseParams,
-                ...this.optionalParams,
-                ...this.requiredParams,
-              ].forEach((param) =>
-                expect(res.body[0]).to.have.property(param.paramName)
-              );
+              this.runResponseParamsCheck(res.body[0]);
 
               const [{ id }] = res.body;
               this.tempId = id;
@@ -72,13 +82,7 @@ class TestFactory {
               expect(res.body).to.not.have.property("error");
               expect(res.body).to.be.an("object");
 
-              [
-                ...this.responseParams,
-                ...this.optionalParams,
-                ...this.requiredParams,
-              ].forEach((param) =>
-                expect(res.body).to.have.property(param.paramName)
-              );
+              this.runResponseParamsCheck(res.body);
 
               done();
             });
@@ -95,6 +99,7 @@ class TestFactory {
     const genericPostTestCase = () => {
       let postData = {};
 
+      // Setup post data
       [...this.requiredParams, ...this.optionalParams].forEach(
         (param) => (postData[param.paramName] = param.validValue)
       );
@@ -111,13 +116,7 @@ class TestFactory {
               expect(res.body).to.not.have.property("error");
               expect(res.body).to.be.an("object");
 
-              [
-                ...this.responseParams,
-                ...this.optionalParams,
-                ...this.requiredParams,
-              ].forEach((param) =>
-                expect(res.body).to.have.property(param.paramName)
-              );
+              this.runResponseParamsCheck(res.body);
 
               const { id } = res.body;
 
@@ -138,6 +137,7 @@ class TestFactory {
     const genericPutTestCase = () => {
       let putData = {};
 
+      // Setup put data (update)
       this.updateParams.forEach(
         (param) => (putData[param.paramName] = param.validValue)
       );
@@ -154,13 +154,7 @@ class TestFactory {
               expect(res.body).to.not.have.property("error");
               expect(res.body).to.be.an("object");
 
-              [
-                ...this.responseParams,
-                ...this.optionalParams,
-                ...this.requiredParams,
-              ].forEach((param) =>
-                expect(res.body).to.have.property(param.paramName)
-              );
+              this.runResponseParamsCheck(res.body);
 
               done();
             });
@@ -186,6 +180,8 @@ class TestFactory {
               expect(res.body).to.not.have.property("error");
               expect(res.body).to.be.an("object");
 
+              this.runResponseParamsCheck(res.body);
+
               done();
             });
         });
@@ -196,46 +192,27 @@ class TestFactory {
     return this;
   }
 
-  registerOptionalParam(param) {
-    if (!param instanceof OptionalParam)
+  registerParam(param) {
+    if (!param instanceof Param)
       throw Error(
-        `Invalid parameter class. Argument should be type of OptionalParam, '${param?.constructor?.name} given.'`
+        `Invalid parameter class. Argument should be type of Param, '${param?.constructor?.name} given.'`
       );
 
-    this.optionalParams.push(param);
+    const {
+      constructor: { name: paramType },
+    } = param;
 
-    return this;
-  }
+    const validParamTypes = [
+      "RequiredParam",
+      "OptionalParam",
+      "ResponseParam",
+      "UpdateParam",
+    ];
 
-  registerRequiredParam(param) {
-    if (!param instanceof RequiredParam)
-      throw Error(
-        `Invalid parameter class. Argument should be type of RequiredParam, '${param?.constructor?.name} given.'`
-      );
+    // ??????????
+    const paramArrayName = paramType.split("Param")[0].toLowerCase() + "Params";
 
-    this.requiredParams.push(param);
-
-    return this;
-  }
-
-  registerResponseParam(param) {
-    if (!param instanceof ResponseParam)
-      throw Error(
-        `Invalid parameter class. Argument should be type of ResponseParam, '${param?.constructor?.name} given.'`
-      );
-
-    this.responseParams.push(param);
-
-    return this;
-  }
-
-  registerUpdateParam(param) {
-    if (!param instanceof UpdateParam)
-      throw Error(
-        `Invalid parameter class. Argument should be type of UpdateParam, '${param?.constructor?.name} given.'`
-      );
-
-    this.updateParams.push(param);
+    if (validParamTypes.includes(paramType)) this[paramArrayName].push(param);
 
     return this;
   }
@@ -250,7 +227,7 @@ class TestFactory {
   }
 }
 
-class OptionalParam {
+class Param {
   constructor(paramName, validValue) {
     this.paramName = paramName;
     this.validValue = validValue;
@@ -265,37 +242,27 @@ class OptionalParam {
   }
 }
 
-class RequiredParam {
+class RequiredParam extends Param {
   constructor(paramName, validValue) {
-    this.paramName = paramName;
-    this.validValue = validValue;
-    this.transform = this.transform.bind(this);
-  }
-
-  transform() {
-    return {
-      [this.paramName]: this.validValue,
-    };
+    super(paramName, validValue);
   }
 }
 
-class UpdateParam {
+class OptionalParam extends Param {
   constructor(paramName, validValue) {
-    this.paramName = paramName;
-    this.validValue = validValue;
-    this.transform = this.transform.bind(this);
-  }
-
-  transform() {
-    return {
-      [this.paramName]: this.validValue,
-    };
+    super(paramName, validValue);
   }
 }
 
-class ResponseParam {
+class UpdateParam extends Param {
+  constructor(paramName, validValue) {
+    super(paramName, validValue);
+  }
+}
+
+class ResponseParam extends Param {
   constructor(paramName) {
-    this.paramName = paramName;
+    super(paramName, null);
   }
 }
 
