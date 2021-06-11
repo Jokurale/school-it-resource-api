@@ -8,7 +8,13 @@ const suite = new TestFactory({
   moduleName: "Teacher",
   path: "/teachers",
   app,
-  extraGetPaths: ["/homeworks", "/marks", "/profile", "/addresses"],
+  extraGetPaths: [
+    "/homeworks",
+    "/marks",
+    "/profile",
+    "/personalInfo",
+    "/addresses",
+  ],
 });
 
 suite
