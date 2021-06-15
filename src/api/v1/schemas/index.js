@@ -9,6 +9,7 @@ const CredentialSchema = require("./CredentialSchema");
 const GroupSchema = require("./GroupSchema");
 const LessonSchema = require("./LessonSchema");
 const AttendanceSchema = require("./AttendanceSchema");
+const PlanSchema = require("./PlanSchema");
 
 module.exports = {
   AddressSchema,
@@ -22,4 +23,5 @@ module.exports = {
   GroupSchema,
   LessonSchema,
   AttendanceSchema,
+  PlanSchema,
 };

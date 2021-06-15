@@ -8,6 +8,7 @@ const validateUser = require("./UserValidator");
 const validateGroup = require("./GroupValidator");
 const validateLesson = require("./LessonValidator");
 const validateAttendance = require("./AttendanceValidator");
+const validatePlan = require("./PlanValidator");
 
 module.exports = {
   validateAddress,
@@ -20,4 +21,5 @@ module.exports = {
   validateUser,
   validateGroup,
   validateAttendance,
+  validatePlan,
 };

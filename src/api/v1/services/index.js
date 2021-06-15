@@ -10,6 +10,7 @@ const GroupService = require("./GroupService");
 const TeacherService = require("./TeacherService");
 const LessonService = require("./LessonService");
 const AttendanceService = require("./AttendanceService");
+const PlanService = require("./PlanService");
 
 module.exports = {
   AddressService,
@@ -24,4 +25,5 @@ module.exports = {
   GroupService,
   TeacherService,
   AttendanceService,
+  PlanService,
 };
