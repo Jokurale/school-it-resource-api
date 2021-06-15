@@ -49,7 +49,6 @@ const getTeachersPersonalInfo = ash(async (req, res) => {
 });
 
 module.exports = {
-  getTeachersHomeworks,
   getAllTeachers,
   getTeacherById,
   getTeachersAddresses,
