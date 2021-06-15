@@ -20,14 +20,6 @@ const getPersonalInfoById = ash(async (req, res) => {
   return res.json(PersonalInfo);
 });
 
-// ~> Add PersonalInfo
-const addPersonalInfo = ash(async (req, res) => {
-  const result = await PersonalInfoService.addPersonalInfo(req.body);
-
-  if (result) res.status(201);
-  return res.json(result);
-});
-
 // ~> Update PersonalInfo
 const updatePersonalInfo = ash(async (req, res) => {
   const { id } = req.params;
@@ -37,19 +29,8 @@ const updatePersonalInfo = ash(async (req, res) => {
   return res.json(result);
 });
 
-// ~> Remove PersonalInfo
-const removePersonalInfo = ash(async (req, res) => {
-  const { id } = req.params;
-
-  const result = await PersonalInfoService.removePersonalInfo(id);
-
-  return res.json(result);
-});
-
 module.exports = {
   getAllPersonalInfos,
   getPersonalInfoById,
-  addPersonalInfo,
   updatePersonalInfo,
-  removePersonalInfo,
 };
