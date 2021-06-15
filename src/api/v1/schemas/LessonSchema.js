@@ -7,7 +7,7 @@ const createSchema = Joi.object({
   teacherId: Joi.string().length(36).required(),
   roomId: Joi.string().length(36).required(),
   subjectId: Joi.string().length(36).required(),
-  hourId: Joi.string().length(36),
+  hourId: Joi.string().length(36).required(),
 }).required();
 
 const updateSchema = Joi.object({
