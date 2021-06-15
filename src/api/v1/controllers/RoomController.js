@@ -44,10 +44,19 @@ const removeRoom = ash(async (req, res) => {
   return res.json(result);
 });
 
+const getRoomsLessons = ash(async (req, res) => {
+  const { id } = req.params;
+
+  const result = await RoomService.getLessons(id);
+
+  return res.json(result);
+});
+
 module.exports = {
   getAllRooms,
   getRoomById,
   addRoom,
   updateRoom,
   removeRoom,
+  getRoomsLessons,
 };
