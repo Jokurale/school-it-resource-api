@@ -26,11 +26,27 @@ model address {
   @@map("Addresses")
 }
 
+model attendance {
+  id   String   @id @default(uuid())
+  date DateTime @db.Date
+  type String
+
+  // Relation's fields
+  studentId String @map("student_id")
+  teacherId String @map("teacher_id")
+  hourId String @map("hour_id")
+
+  // Relations
+  teacher teacher @relation(fields: [teacherId], references: [id]) // One-to-many
+  student student @relation(fields: [studentId], references: [id]) // One-to-many
+  hour hour @relation(fields: [hourId], references: [id]) // One-to-many
+}
+
 model credential {
   id       String @id @default(uuid())
   login    String @unique @db.VarChar(255)
   password String @db.VarChar(255)
-  role     String @db.VarChar(255) @default("student")
+  role     String @default("student") @db.VarChar(255)
 
   // Relation's fields
   userId String @unique @map("user_id")
@@ -56,32 +72,31 @@ model personalInfo {
   // Relations
   user user @relation(fields: [userId], references: [id]) // One-to-one
 
-  @@map("PersonalInfo")
+  @@map("PersonalInfos")
 }
 
 model plan {
-  id        String @id @default(uuid())
-  monday    Json
-  tuesday   Json
-  wednesday Json
-  thursday  Json
-  friday    Json
+  id String @id @default(uuid())
 
   // Relation's fields
-  groupId String @unique @map("group_id")
+  groupId String   @unique @map("group_id")
+  lesson  lesson[]
 
   // Relations
   group group @relation(fields: [groupId], references: [id])
+
+  @@map("Plans")
 }
 
 model student {
   id String @id @default(uuid())
 
   // Relation's fields
-  userId   String     @map("user_id")
-  group    group[]
-  homework homework[]
-  mark     mark[]
+  userId     String       @map("user_id")
+  group      group[]
+  homework   homework[]
+  mark       mark[]
+  attendance attendance[]
 
   // Relations
   user user @relation(fields: [userId], references: [id]) // One-to-one
@@ -93,9 +108,11 @@ model teacher {
   id String @id @default(uuid())
 
   // Relation's fields
-  userId   String     @map("user_id")
-  homework homework[]
-  mark     mark[]
+  userId     String       @map("user_id")
+  homework   homework[]
+  mark       mark[]
+  lesson     lesson[]
+  attendance attendance[]
 
   // Relations
   user user @relation(fields: [userId], references: [id]) // One-to-one
@@ -131,10 +148,29 @@ model subject {
   name String @db.VarChar(255)
 
   // Relation's fields
-  mark mark[]
+  mark   mark[]
+  lesson lesson[]
 
 
   @@map("Subjects")
+}
+
+model lesson {
+  id  String @id @default(uuid())
+  day String
+
+  // Relation's fields
+  hourId    String @map("hour_id")
+  roomId    String @map("room_id")
+  subjectId String @map("subject_id")
+  teacherId String @map("teacher_id")
+  plan      plan[]
+
+  // Relations
+  teacher teacher @relation(fields: [teacherId], references: [id]) // One-to-many
+  subject subject @relation(fields: [subjectId], references: [id]) // One-to-many
+  hour    hour    @relation(fields: [hourId], references: [id]) // One-to-many
+  room    room    @relation(fields: [roomId], references: [id]) // One-to-many
 }
 
 model mark {
@@ -176,8 +212,11 @@ model homework {
 
 model room {
   id     String @id @default(uuid())
-  number String @db.VarChar(10) @unique
+  number String @unique @db.VarChar(10)
   type   String @db.VarChar(255)
+
+  // Relation's fields
+  lesson lesson[]
 
   @@map("Rooms")
 }
@@ -186,7 +225,11 @@ model hour {
   id   String @id @default(uuid())
   from String @db.VarChar(255)
   to   String @db.VarChar(255)
-  no Int @default(0) @map("number_of")
-  
+  no   Int    @default(0) @map("number_of")
+
+  // Relation's fileds
+  lesson lesson[]
+  attendance attendance[]
+
   @@map("Hours")
 }

@@ -391,37 +391,37 @@ async function main() {
   }
 
   // *** Plans
-  console.log(chalk.cyan(`Seeding plans for individual groups...`));
+  // console.log(chalk.cyan(`Seeding plans for individual groups...`));
 
-  const days = ["monday", "tuesday", "wednesday", "thursday", "friday"];
+  // const days = ["monday", "tuesday", "wednesday", "thursday", "friday"];
 
-  const groups = await prisma.group.findMany();
+  // const groups = await prisma.group.findMany();
 
-  let plans = {};
+  // let plans = {};
 
-  for (const group of groups) {
-    for (const day of days) {
-      let dayLessons = [];
+  // for (const group of groups) {
+  //   for (const day of days) {
+  //     let dayLessons = [];
 
-      for (let index = 0; index < 5; index++) {
-        const lesson = await randomLesson();
+  //     for (let index = 0; index < 5; index++) {
+  //       const lesson = await randomLesson();
 
-        dayLessons.push({
-          ...lesson,
-          hour_number: index + 1,
-        });
-      }
+  //       dayLessons.push({
+  //         ...lesson,
+  //         hour_number: index + 1,
+  //       });
+  //     }
 
-      plans[day] = dayLessons;
-    }
+  //     plans[day] = dayLessons;
+  //   }
 
-    await prisma.plan.create({
-      data: {
-        groupId: group.id,
-        ...plans,
-      },
-    });
-  }
+  //   await prisma.plan.create({
+  //     data: {
+  //       groupId: group.id,
+  //       ...plans,
+  //     },
+  //   });
+  // }
 }
 
 main()
