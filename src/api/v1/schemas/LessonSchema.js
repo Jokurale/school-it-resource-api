@@ -13,9 +13,9 @@ const createSchema = Joi.object({
 const updateSchema = Joi.object({
   day: Joi.string().valid(
     "Monday",
-    "Thrusday",
+    "Tuesday",
     "Wednesday",
-    "Theusday",
+    "Thursday",
     "Friday"
   ),
   teacherId: Joi.string().length(36),
