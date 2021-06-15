@@ -8,9 +8,11 @@ const UserService = require("./UserService");
 const StudentService = require("./StudentService");
 const GroupService = require("./GroupService");
 const TeacherService = require("./TeacherService");
+const LessonService = require("./LessonService");
 
 module.exports = {
   AddressService,
+  LessonService,
   RoomService,
   SubjectService,
   HomeworkService,

@@ -18,6 +18,7 @@ const UserRoute = require("./UserRoute");
 const StudentRoute = require("./StudentRoute");
 const GroupRoute = require("./GroupRoute");
 const TeacherRoute = require("./TeacherRoute");
+const LessonRoute = require("./LessonRoute");
 
 // ! Route setup
 router.use("/auth", SpecialRoute);
@@ -37,5 +38,6 @@ router.use("/users", UserRoute);
 router.use("/students", StudentRoute);
 router.use("/groups", GroupRoute);
 router.use("/teachers", TeacherRoute);
+router.use("/lessons", LessonRoute);
 
 module.exports = router;

@@ -7,6 +7,7 @@ const PersonalInfoSchema = require("./PersonalInfoSchema");
 const UserSchema = require("./UserSchema");
 const CredentialSchema = require("./CredentialSchema");
 const GroupSchema = require("./GroupSchema");
+const LessonSchema = require("./LessonSchema");
 
 module.exports = {
   AddressSchema,
@@ -18,4 +19,5 @@ module.exports = {
   UserSchema,
   CredentialSchema,
   GroupSchema,
+  LessonSchema,
 };

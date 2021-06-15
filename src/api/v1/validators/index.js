@@ -6,9 +6,11 @@ const validateMark = require("./MarkValidator");
 const validatePersonalInfo = require("./PersonalInfoValidator");
 const validateUser = require("./UserValidator");
 const validateGroup = require("./GroupValidator");
+const validateLesson = require("./LessonValidator");
 
 module.exports = {
   validateAddress,
+  validateLesson,
   validateRoom,
   validateSubject,
   validateHomework,
