@@ -9,6 +9,9 @@ const UserController = require("./UserController");
 const StudentController = require("./StudentController");
 const GroupController = require("./GroupController");
 const TeacherController = require("./TeacherController");
+const AttendanceController = require("./AttendanceController");
+const LessonController = require("./LessonController");
+const PlanController = require("./PlanController");
 
 module.exports = {
   AddressController,
@@ -22,4 +25,7 @@ module.exports = {
   PersonalInfoController,
   UserController,
   TeacherController,
+  AttendanceController,
+  LessonController,
+  PlanController,
 };
