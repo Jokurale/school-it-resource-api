@@ -9,8 +9,9 @@ const {
   getStudentsAddresses,
   getStudentsMarks,
   getStudentsPersonalInfo,
-  assignStudentToGroup,
   getStudentsGroup,
+  getStudentsAttendance,
+  assignStudentToGroup,
 } = StudentController;
 
 // ~~> Mounted as /students
@@ -24,6 +25,7 @@ route.get("/:id/marks", getStudentsMarks);
 route.get("/:id/personalInfo", getStudentsPersonalInfo);
 route.get("/:id/group", getStudentsGroup);
 route.post("/:id/group", assignStudentToGroup);
+route.get("/:id/attendance", getStudentsAttendance);
 
 // Aliases
 route.get("/:id/profile", getStudentsPersonalInfo);

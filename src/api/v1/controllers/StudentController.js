@@ -56,6 +56,14 @@ const getStudentsGroup = ash(async (req, res) => {
   return res.json(group);
 });
 
+const getStudentsAttendance = ash(async (req, res) => {
+  const { id: studentId } = req.params;
+
+  const attendance = await StudentService.getAttendance(studentId);
+
+  return res.json(attendance);
+});
+
 const assignStudentToGroup = ash(async (req, res) => {
   const { id: studentId } = req.params;
 
@@ -72,5 +80,6 @@ module.exports = {
   getStudentsMarks,
   getStudentsPersonalInfo,
   getStudentsGroup,
+  getStudentsAttendance,
   assignStudentToGroup,
 };

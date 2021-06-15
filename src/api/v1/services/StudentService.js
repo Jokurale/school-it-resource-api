@@ -97,6 +97,19 @@ const getGroup = async (studentId) => {
   return group;
 };
 
+const getAttendance = async (studentId) => {
+  const attendance = await prisma.student.findFirst({
+    where: {
+      id: studentId,
+    },
+    include: {
+      attendance: true,
+    },
+  });
+
+  return attendance;
+};
+
 const assignToGroup = async (studentId, group) => {
   const {
     data: { symbol },
@@ -129,4 +142,5 @@ module.exports = {
   getAddresses,
   getGroup,
   assignToGroup,
+  getAttendance,
 };
