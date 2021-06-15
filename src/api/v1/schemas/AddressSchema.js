@@ -25,6 +25,6 @@ const updateSchema = Joi.object({
   state: Joi.string().max(50),
   country: Joi.string().max(50),
   postalCode: Joi.string().max(10),
-});
+}).required();
 
 module.exports = { createSchema, updateSchema, createManySchema };

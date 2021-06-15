@@ -6,6 +6,6 @@ const createSchema = Joi.object({
 
 const updateSchema = Joi.object({
   name: Joi.string().max(150).min(5),
-});
+}).required();
 
 module.exports = { createSchema, updateSchema };

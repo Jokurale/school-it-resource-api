@@ -8,13 +8,13 @@ const createSchema = Joi.object({
   studentId: Joi.string().length(36).required(),
   teacherId: Joi.string().length(36).required(),
   subjectId: Joi.string().length(36).required(),
-});
+}).required();
 
 const updateSchema = Joi.object({
   createdAt: Joi.date(),
   description: Joi.string().max(150),
   mark: Joi.string().max(100).required(),
   weight: Joi.number().min(0).required(),
-});
+}).required();
 
 module.exports = { createSchema, updateSchema };

@@ -8,6 +8,6 @@ const createSchema = Joi.object({
   credential: CredentialSchema.createSchema,
   personalInfo: PersonalInfoSchema.createSchema,
   address: AddressSchema.createManySchema,
-});
+}).required();
 
 module.exports = { createSchema };

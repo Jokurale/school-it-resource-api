@@ -19,6 +19,6 @@ const updateSchema = Joi.object({
     tlds: { allow: ["com", "pl", "net"] },
   }),
   dateOfBirth: Joi.date(),
-});
+}).required();
 
 module.exports = { createSchema, updateSchema };
