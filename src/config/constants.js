@@ -69,7 +69,7 @@ module.exports = Object.freeze({
 
   ALLOWED_EMAIL_DOMAINS: ["pl", "com", "net"],
 
-  MAX_ROOM_TYPE_LENGTH: 150,
+  MAX_ROOM_TYPE_LENGTH: 50,
   MIN_ROOM_TYPE_LENGTH: 5,
 
   // ! Room's numbers are treated as strings (e.g 100A, 100B)
@@ -79,5 +79,6 @@ module.exports = Object.freeze({
   MAX_SUBJECT_NAME_LENGTH: 50,
   MIN_SUBJECT_NAME_LENGTH: 2,
 
-  GENERAL_REGEX: "/^[,. -a-zA-Z0-9]+$/",
+  // prettier-ignore
+  GENERAL_REGEX: "^[,. \\-\\w0-9]+$",
 });

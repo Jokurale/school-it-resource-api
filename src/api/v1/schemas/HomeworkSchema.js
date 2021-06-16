@@ -5,6 +5,7 @@ const {
     UUID_LENGTH,
     MAX_HOMEWORK_DESCRIPTION_LENGTH,
     MIN_HOMEWORK_DESCRIPTION_LENGTH,
+    GENERAL_REGEX,
   },
 } = require("../config");
 
@@ -12,7 +13,7 @@ const createSchema = Joi.object({
   createdAt: Joi.date().required(),
   deadline: Joi.date().required(),
   description: Joi.string()
-    .alphanum()
+    .regex(RegExp(GENERAL_REGEX))
     .min(MIN_HOMEWORK_DESCRIPTION_LENGTH)
     .max(MAX_HOMEWORK_DESCRIPTION_LENGTH)
     .required(),
@@ -25,7 +26,8 @@ const updateSchema = Joi.object({
   deadline: Joi.date(),
   description: Joi.string()
     .min(MIN_HOMEWORK_DESCRIPTION_LENGTH)
-    .max(MAX_HOMEWORK_DESCRIPTION_LENGTH),
+    .max(MAX_HOMEWORK_DESCRIPTION_LENGTH)
+    .regex(RegExp(GENERAL_REGEX)),
   studentId: Joi.string().length(UUID_LENGTH),
   teacherId: Joi.string().length(UUID_LENGTH),
 }).required();
