@@ -107,7 +107,7 @@ const randomDayName = () => {
   return day;
 };
 
-const randomLesson = async () => {
+const randomLessonId = async () => {
   const lessons = await prisma.lesson.findMany({
     select: {
       id: true,
@@ -411,7 +411,7 @@ async function main() {
   // *** Lessons
   console.log(chalk.cyan(`Seeding lessons...`));
 
-  for (let index = 0; index < 50; index++) {
+  for (let index = 0; index < 100; index++) {
     await prisma.lesson.create({
       data: {
         day: randomDayName(),
@@ -423,40 +423,50 @@ async function main() {
     });
   }
 
-  // *** Plans
-  // console.log(chalk.cyan(`Seeding plans for individual groups...`));
+  // *** Schedules
+  console.log(chalk.cyan(`Seeding schedules for individual groups...`));
 
-  // const days = ["monday", "tuesday", "wednesday", "thursday", "friday"];
+  const groups = await prisma.group.findMany();
 
-  // const groups = await prisma.group.findMany();
+  for (const group of groups) {
+    await prisma.schedule.create({
+      data: {
+        group: {
+          connect: { id: group.id },
+        },
+      },
+    });
+  }
 
-  // let plans = {};
+  console.log(chalk.cyan(`Filling schedules with mock lessons...`));
 
-  // for (const group of groups) {
-  //   for (const day of days) {
-  //     let dayLessons = [];
+  const schedules = await prisma.schedule.findMany({});
 
-  //     for (let index = 0; index < 5; index++) {
-  //       const lesson = await randomLesson();
+  for (const schedule of schedules) {
+    const lessonsIds = [];
 
-  //       dayLessons.push({
-  //         ...lesson,
-  //         hour_number: index + 1,
-  //       });
-  //     }
+    for (let index = 0; index < 25; index++) {
+      const lessonId = await randomLessonId();
 
-  //     plans[day] = dayLessons;
-  //   }
+      lessonsIds.push(lessonId);
+    }
 
-  //   await prisma.plan.create({
-  //     data: {
-  //       groupId: group.id,
-  //       ...plans,
-  //     },
-  //   });
-  // }
+    for (const lessonId of lessonsIds) {
+      await prisma.schedule.update({
+        where: {
+          id: schedule.id,
+        },
+        data: {
+          lesson: {
+            connect: {
+              id: lessonId,
+            },
+          },
+        },
+      });
+    }
+  }
 }
-
 main()
   .catch((e) => {
     console.error(e);
