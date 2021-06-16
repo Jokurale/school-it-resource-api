@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `attendance` MODIFY `date` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP(3);

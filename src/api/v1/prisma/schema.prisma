@@ -28,7 +28,7 @@ model address {
 
 model attendance {
   id   String   @id @default(uuid())
-  date DateTime @db.Date
+  date DateTime @db.Date @default(now())
   type String
 
   // Relation's fields
