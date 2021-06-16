@@ -21,6 +21,7 @@ const TeacherRoute = require("./TeacherRoute");
 const LessonRoute = require("./LessonRoute");
 const AttendanceRoute = require("./AttendanceRoute");
 const ScheduleRoute = require("./ScheduleRoute");
+const CredentialRoute = require("./CredentialRoute");
 
 // ! Route setup
 router.use("/auth", SpecialRoute);
@@ -43,5 +44,6 @@ router.use("/teachers", TeacherRoute);
 router.use("/lessons", LessonRoute);
 router.use("/attendance", AttendanceRoute);
 router.use("/schedules", ScheduleRoute);
+router.use("/credentials", CredentialRoute);
 
 module.exports = router;

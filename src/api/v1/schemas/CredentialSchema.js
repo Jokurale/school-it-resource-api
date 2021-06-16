@@ -21,10 +21,10 @@ const createSchema = Joi.object({
     .alphanum()
     .required(),
   password: Joi.string()
-    .regex(RegExp(PASSWORD_REGEX_PATTERN))
-    .required()
     .min(MIN_PASSWORD_LENGTH)
-    .max(MAX_PASSWORD_LENGTH),
+    .max(MAX_PASSWORD_LENGTH)
+    .regex(RegExp(PASSWORD_REGEX_PATTERN))
+    .required(),
   role: Joi.string()
     .alphanum()
     .min(MIN_ROLE_LENGTH)
@@ -33,4 +33,12 @@ const createSchema = Joi.object({
     .valid(...VALID_ROLES_TO_REGISTER),
 }).required();
 
-module.exports = { createSchema };
+const updateSchema = Joi.object({
+  password: Joi.string()
+    .regex(RegExp(PASSWORD_REGEX_PATTERN))
+    .required()
+    .min(MIN_PASSWORD_LENGTH)
+    .max(MAX_PASSWORD_LENGTH),
+}).required();
+
+module.exports = { createSchema, updateSchema };

@@ -11,6 +11,7 @@ const TeacherService = require("./TeacherService");
 const LessonService = require("./LessonService");
 const AttendanceService = require("./AttendanceService");
 const ScheduleService = require("./ScheduleService");
+const CredentialService = require("./CredentialService");
 
 module.exports = {
   AddressService,
@@ -26,4 +27,5 @@ module.exports = {
   TeacherService,
   AttendanceService,
   ScheduleService,
+  CredentialService,
 };

@@ -22,8 +22,9 @@ module.exports = Object.freeze({
   MAX_LOGIN_LENGTH: 3,
   MIN_LOGIN_LENGTH: 30,
 
+  // prettier-ignore
   PASSWORD_REGEX_PATTERN:
-    "/(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[$@$!#.])[A-Za-zd$@$!%*?&.]{8,25}/",
+    "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
 
   MAX_PASSWORD_LENGTH: 25,
   MIN_PASSWORD_LENGTH: 8,

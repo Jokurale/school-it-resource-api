@@ -9,6 +9,7 @@ const validateGroup = require("./GroupValidator");
 const validateLesson = require("./LessonValidator");
 const validateAttendance = require("./AttendanceValidator");
 const validateSchedule = require("./ScheduleValidator");
+const validatePassword = require("./PasswordValidator");
 
 module.exports = {
   validateAddress,
@@ -22,4 +23,5 @@ module.exports = {
   validateGroup,
   validateAttendance,
   validateSchedule,
+  validatePassword,
 };

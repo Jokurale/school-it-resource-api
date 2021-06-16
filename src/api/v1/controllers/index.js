@@ -12,6 +12,7 @@ const TeacherController = require("./TeacherController");
 const AttendanceController = require("./AttendanceController");
 const LessonController = require("./LessonController");
 const ScheduleController = require("./ScheduleController");
+const CredentialController = require("./CredentialController");
 
 module.exports = {
   AddressController,
@@ -28,4 +29,5 @@ module.exports = {
   AttendanceController,
   LessonController,
   ScheduleController,
+  CredentialController,
 };
