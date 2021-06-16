@@ -56,7 +56,13 @@ const getUserById = async (id) => {
           address: true,
         },
       },
-      credential: true,
+      credential: {
+        select: {
+          id: true,
+          login: true,
+          role: true,
+        },
+      },
       student: {
         include: {
           homework: true,
