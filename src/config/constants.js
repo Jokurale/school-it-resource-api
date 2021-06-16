@@ -78,4 +78,6 @@ module.exports = Object.freeze({
 
   MAX_SUBJECT_NAME_LENGTH: 50,
   MIN_SUBJECT_NAME_LENGTH: 2,
+
+  GENERAL_REGEX: "/^[,. -a-zA-Z0-9]+$/",
 });

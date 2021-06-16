@@ -15,13 +15,18 @@ const {
 } = require("../config");
 
 const createSchema = Joi.object({
-  login: Joi.string().min(MIN_LOGIN_LENGTH).max(MAX_LOGIN_LENGTH).required(),
+  login: Joi.string()
+    .min(MIN_LOGIN_LENGTH)
+    .max(MAX_LOGIN_LENGTH)
+    .alphanum()
+    .required(),
   password: Joi.string()
     .regex(RegExp(PASSWORD_REGEX_PATTERN))
     .required()
     .min(MIN_PASSWORD_LENGTH)
     .max(MAX_PASSWORD_LENGTH),
   role: Joi.string()
+    .alphanum()
     .min(MIN_ROLE_LENGTH)
     .max(MAX_ROLE_LENGTH)
     .default(DEFAULT_ROLE_ON_REGISTER)

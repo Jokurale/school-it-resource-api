@@ -8,11 +8,15 @@ const createSchema = Joi.object({
   name: Joi.string()
     .max(MAX_SUBJECT_NAME_LENGTH)
     .min(MIN_SUBJECT_NAME_LENGTH)
+    .alphanum()
     .required(),
 }).required();
 
 const updateSchema = Joi.object({
-  name: Joi.string().max(MAX_SUBJECT_NAME_LENGTH).min(MIN_SUBJECT_NAME_LENGTH),
+  name: Joi.string()
+    .max(MAX_SUBJECT_NAME_LENGTH)
+    .min(MIN_SUBJECT_NAME_LENGTH)
+    .alphanum(),
 }).required();
 
 module.exports = { createSchema, updateSchema };

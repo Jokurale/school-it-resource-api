@@ -17,13 +17,16 @@ const createSchema = Joi.object({
   firstname: Joi.string()
     .max(MAX_FIRSTNAME_LENGTH)
     .min(MIN_FIRSTNAME_LENGTH)
+    .alphanum()
     .required(),
   middlename: Joi.string()
     .max(MAX_MIDDLENAME_LENGTH)
-    .min(MIN_MIDDLENAME_LENGTH),
+    .min(MIN_MIDDLENAME_LENGTH)
+    .alphanum(),
   lastname: Joi.string()
     .max(MAX_LASTNAME_LENGTH)
     .min(MIN_LASTNAME_LENGTH)
+    .alphanum()
     .required(),
   email: Joi.string()
     .email({
@@ -35,11 +38,18 @@ const createSchema = Joi.object({
 }).required();
 
 const updateSchema = Joi.object({
-  firstname: Joi.string().max(MAX_FIRSTNAME_LENGTH).min(MIN_FIRSTNAME_LENGTH),
+  firstname: Joi.string()
+    .max(MAX_FIRSTNAME_LENGTH)
+    .min(MIN_FIRSTNAME_LENGTH)
+    .alphanum(),
   middlename: Joi.string()
     .max(MAX_MIDDLENAME_LENGTH)
-    .min(MIN_MIDDLENAME_LENGTH),
-  lastname: Joi.string().max(MAX_LASTNAME_LENGTH).min(MIN_LASTNAME_LENGTH),
+    .min(MIN_MIDDLENAME_LENGTH)
+    .alphanum(),
+  lastname: Joi.string()
+    .max(MAX_LASTNAME_LENGTH)
+    .min(MIN_LASTNAME_LENGTH)
+    .alphanum(),
   email: Joi.string().email({
     minDomainSegments: MIN_EMAIL_DOMAIN_SEGEMENTS,
     tlds: { allow: ALLOWED_EMAIL_DOMAINS },

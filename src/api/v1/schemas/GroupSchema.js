@@ -8,6 +8,7 @@ const createSchema = Joi.object({
   symbol: Joi.string()
     .min(MIN_GROUP_SYMBOL_LENGTH)
     .max(MAX_GROUP_SYMBOL_LENGTH)
+    .alphanum()
     .required(),
 }).required();
 

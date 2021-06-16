@@ -15,6 +15,7 @@ const {
     UUID_LENGTH,
     MAX_ADDRESSES_PER_REGISTER,
     MIN_ADDRESSES_PER_REGISTER,
+    GENERAL_REGEX,
   },
 } = require("../config");
 
@@ -22,18 +23,35 @@ const createSchema = Joi.object({
   address1: Joi.string()
     .max(MAX_ADDRESS_LENGTH)
     .min(MIN_ADDRESS_LENGTH)
+    .regex(RegExp(GENERAL_REGEX))
     .required(),
-  address2: Joi.string().max(MAX_ADDRESS_LENGTH).min(MIN_ADDRESS_LENGTH),
-  address3: Joi.string().max(MAX_ADDRESS_LENGTH).min(MIN_ADDRESS_LENGTH),
-  city: Joi.string().max(MAX_CITY_LENGTH).min(MIN_CITY_LENGTH).required(),
-  state: Joi.string().max(MAX_STATE_LENGTH).min(MIN_STATE_LENGTH).required(),
+  address2: Joi.string()
+    .max(MAX_ADDRESS_LENGTH)
+    .min(MIN_ADDRESS_LENGTH)
+    .regex(RegExp(GENERAL_REGEX)),
+  address3: Joi.string()
+    .max(MAX_ADDRESS_LENGTH)
+    .min(MIN_ADDRESS_LENGTH)
+    .regex(RegExp(GENERAL_REGEX)),
+  city: Joi.string()
+    .max(MAX_CITY_LENGTH)
+    .min(MIN_CITY_LENGTH)
+    .alphanum()
+    .required(),
+  state: Joi.string()
+    .max(MAX_STATE_LENGTH)
+    .min(MIN_STATE_LENGTH)
+    .alphanum()
+    .required(),
   country: Joi.string()
     .max(MAX_COUNTRY_LENGTH)
     .min(MIN_COUNTRY_LENGTH)
+    .alphanum()
     .required(),
   postalCode: Joi.string()
     .max(MAX_POSTAL_CODE_LENGTH)
     .min(MIN_POSTAL_CODE_LENGTH)
+    .regex(RegExp(GENERAL_REGEX))
     .required(),
   personalInfoId: Joi.string().length(UUID_LENGTH).required(),
 }).required();
@@ -45,15 +63,28 @@ const createManySchema = Joi.array()
   .required();
 
 const updateSchema = Joi.object({
-  address1: Joi.string().max(MAX_ADDRESS_LENGTH).min(MIN_ADDRESS_LENGTH),
-  address2: Joi.string().max(MAX_ADDRESS_LENGTH).min(MIN_ADDRESS_LENGTH),
-  address3: Joi.string().max(MAX_ADDRESS_LENGTH).min(MIN_ADDRESS_LENGTH),
-  city: Joi.string().max(MAX_CITY_LENGTH).min(MIN_CITY_LENGTH),
-  state: Joi.string().max(MAX_STATE_LENGTH).min(MIN_STATE_LENGTH),
-  country: Joi.string().max(MAX_COUNTRY_LENGTH).min(MIN_COUNTRY_LENGTH),
+  address1: Joi.string()
+    .max(MAX_ADDRESS_LENGTH)
+    .min(MIN_ADDRESS_LENGTH)
+    .regex(RegExp(GENERAL_REGEX)),
+  address2: Joi.string()
+    .max(MAX_ADDRESS_LENGTH)
+    .min(MIN_ADDRESS_LENGTH)
+    .regex(RegExp(GENERAL_REGEX)),
+  address3: Joi.string()
+    .max(MAX_ADDRESS_LENGTH)
+    .min(MIN_ADDRESS_LENGTH)
+    .regex(RegExp(GENERAL_REGEX)),
+  city: Joi.string().max(MAX_CITY_LENGTH).min(MIN_CITY_LENGTH).alphanum(),
+  state: Joi.string().max(MAX_STATE_LENGTH).min(MIN_STATE_LENGTH).alphanum(),
+  country: Joi.string()
+    .max(MAX_COUNTRY_LENGTH)
+    .min(MIN_COUNTRY_LENGTH)
+    .alphanum(),
   postalCode: Joi.string()
     .max(MAX_POSTAL_CODE_LENGTH)
-    .min(MIN_POSTAL_CODE_LENGTH),
+    .min(MIN_POSTAL_CODE_LENGTH)
+    .regex(RegExp(GENERAL_REGEX)),
 }).required();
 
 module.exports = { createSchema, updateSchema, createManySchema };

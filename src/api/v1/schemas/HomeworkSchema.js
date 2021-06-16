@@ -12,6 +12,7 @@ const createSchema = Joi.object({
   createdAt: Joi.date().required(),
   deadline: Joi.date().required(),
   description: Joi.string()
+    .alphanum()
     .min(MIN_HOMEWORK_DESCRIPTION_LENGTH)
     .max(MAX_HOMEWORK_DESCRIPTION_LENGTH)
     .required(),
