@@ -2,11 +2,11 @@
   "name": "school-managment-api",
   "version": "1.0.0",
   "description": "School management SQL-based API",
-  "main": "server.js",
+  "main": "./src/index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "test": "npx mocha .\\tests\\*.test.js -exit",
-    "testci": "npx mocha ./tests/*.test.js -exit",
+    "test": "npx mocha .\\tests\\*.test.js -exit -b",
+    "testci": "npx mocha ./tests/*.test.js -exit -b",
     "genprisma": "cd ./src/api/v1 && npx prisma generate"
   },
   "author": "Michał Podsiadły <podsiadly.michal@protonmail.com>",
