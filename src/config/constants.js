@@ -81,4 +81,14 @@ module.exports = Object.freeze({
 
   // prettier-ignore
   GENERAL_REGEX: "^[,. \\-\\w0-9]+$",
+
+  PROTECTED_ROLES: ["admin", "root", "administrator", "headmaster"],
+  AVAILABLE_ROLES: [
+    "admin",
+    "headmaster",
+    "root",
+    "administrator",
+    "teacher",
+    "student",
+  ],
 });
