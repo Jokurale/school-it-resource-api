@@ -20,7 +20,7 @@ const GroupRoute = require("./GroupRoute");
 const TeacherRoute = require("./TeacherRoute");
 const LessonRoute = require("./LessonRoute");
 const AttendanceRoute = require("./AttendanceRoute");
-const PlanRoute = require("./PlanRoute");
+const ScheduleRoute = require("./ScheduleRoute");
 
 // ! Route setup
 router.use("/auth", SpecialRoute);
@@ -42,6 +42,6 @@ router.use("/groups", GroupRoute);
 router.use("/teachers", TeacherRoute);
 router.use("/lessons", LessonRoute);
 router.use("/attendance", AttendanceRoute);
-router.use("/plans", PlanRoute);
+router.use("/schedules", ScheduleRoute);
 
 module.exports = router;

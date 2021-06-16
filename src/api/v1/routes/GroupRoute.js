@@ -8,7 +8,7 @@ const {
   addGroup,
   removeGroup,
   updateGroup,
-  getGroupsPlan,
+  getGroupsSchedule,
 } = GroupController;
 
 // ~~> Mounted as /groups
@@ -19,6 +19,6 @@ route.post("/", addGroup);
 route.get("/:id", getGroupById);
 route.delete("/:id", removeGroup);
 route.put("/:id", updateGroup);
-route.get("/:id/plan", getGroupsPlan);
+route.get("/:id/schedule", getGroupsSchedule);
 
 module.exports = route;

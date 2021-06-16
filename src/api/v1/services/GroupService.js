@@ -8,13 +8,13 @@ const factory = new ServiceFactory(prisma, validateGroup, "group");
 
 const { getAll, getById, add, update, remove } = factory.getServiceFunctions();
 
-const getPlan = async (groupId) => {
+const getSchedule = async (groupId) => {
   const plan = await prisma.group.findFirst({
     where: {
       id: groupId,
     },
     include: {
-      plan: {
+      schedule: {
         include: {
           lesson: true,
         },
@@ -65,5 +65,5 @@ module.exports = {
   addGroup: add,
   updateGroup: update,
   removeGroup,
-  getPlan,
+  getSchedule,
 };

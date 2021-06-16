@@ -44,10 +44,10 @@ const removeGroup = ash(async (req, res) => {
   return res.json(result);
 });
 
-const getGroupsPlan = ash(async (req, res) => {
+const getGroupsSchedule = ash(async (req, res) => {
   const { id } = req.params;
 
-  const result = await GroupService.getPlan(id);
+  const result = await GroupService.getSchedule(id);
 
   return res.json(result);
 });
@@ -58,5 +58,5 @@ module.exports = {
   addGroup,
   updateGroup,
   removeGroup,
-  getGroupsPlan,
+  getGroupsSchedule,
 };
