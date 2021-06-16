@@ -9,7 +9,9 @@ const {
 
 const chalk = require("chalk");
 
-const DefaultUsers = require("../../../../DefaultUsers");
+const {
+  defaults: { defaultUsers },
+} = require("../config");
 
 const {
   DateHelper: { toMySQLDate },
@@ -120,7 +122,7 @@ const randomLessonId = async () => {
 };
 
 async function main() {
-  for (const user of DefaultUsers) {
+  for (const user of defaultUsers) {
     const { firstname, lastname, dateOfBirth, email, login, password, role } =
       user;
 
