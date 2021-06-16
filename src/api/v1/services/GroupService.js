@@ -8,10 +8,62 @@ const factory = new ServiceFactory(prisma, validateGroup, "group");
 
 const { getAll, getById, add, update, remove } = factory.getServiceFunctions();
 
+const getPlan = async (groupId) => {
+  const plan = await prisma.group.findFirst({
+    where: {
+      id: groupId,
+    },
+    include: {
+      plan: {
+        include: {
+          lesson: true,
+        },
+      },
+    },
+  });
+
+  return plan;
+};
+
+const removeGroup = async (groupId) => {
+  const group = await prisma.group.findFirst({
+    where: {
+      id: groupId,
+    },
+    include: {
+      plan: {
+        select: {
+          id: true,
+        },
+      },
+    },
+  });
+
+  // Disconnect any relations before deleting
+  const planDeleteResult = group?.plan?.id
+    ? await prisma.plan.delete({
+        where: {
+          id: group.plan.id,
+        },
+      })
+    : true;
+
+  if (planDeleteResult) {
+    const result = await prisma.group.delete({
+      where: {
+        id: groupId,
+      },
+    });
+
+    return result;
+  }
+};
+
 module.exports = {
-  getAllMarks: getAll,
-  getMarkById: getById,
-  addMark: add,
-  updateMark: update,
-  removeMark: remove,
+  getAllGroups: getAll,
+  getGroupById: getById,
+  addGroup: add,
+  updateGroup: update,
+  removeGroup,
+  getPlan,
 };

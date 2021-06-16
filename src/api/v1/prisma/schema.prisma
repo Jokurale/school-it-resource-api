@@ -134,11 +134,11 @@ model user {
 
 model group {
   id     String @id @default(uuid())
-  symbol String @db.VarChar(255)
+  symbol String @db.VarChar(255) @unique
 
   // Relation's fields
   student student[]
-  plan    plan?
+  plan    plan[]
 
   @@map("Groups")
 }
