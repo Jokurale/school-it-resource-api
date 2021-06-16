@@ -28,18 +28,18 @@ model address {
 
 model attendance {
   id   String   @id @default(uuid())
-  date DateTime @db.Date @default(now())
+  date DateTime @default(now()) @db.Date
   type String
 
   // Relation's fields
   studentId String @map("student_id")
   teacherId String @map("teacher_id")
-  hourId String @map("hour_id")
+  hourId    String @map("hour_id")
 
   // Relations
   teacher teacher @relation(fields: [teacherId], references: [id]) // One-to-many
   student student @relation(fields: [studentId], references: [id]) // One-to-many
-  hour hour @relation(fields: [hourId], references: [id]) // One-to-many
+  hour    hour    @relation(fields: [hourId], references: [id]) // One-to-many
 }
 
 model credential {
@@ -75,7 +75,7 @@ model personalInfo {
   @@map("PersonalInfos")
 }
 
-model plan {
+model schedule {
   id String @id @default(uuid())
 
   // Relation's fields
@@ -85,7 +85,7 @@ model plan {
   // Relations
   group group @relation(fields: [groupId], references: [id])
 
-  @@map("Plans")
+  @@map("Schedules")
 }
 
 model student {
@@ -134,11 +134,11 @@ model user {
 
 model group {
   id     String @id @default(uuid())
-  symbol String @db.VarChar(255) @unique
+  symbol String @unique @db.VarChar(255)
 
   // Relation's fields
-  student student[]
-  plan    plan[]
+  student  student[]
+  schedule schedule[]
 
   @@map("Groups")
 }
@@ -160,11 +160,11 @@ model lesson {
   day String
 
   // Relation's fields
-  hourId    String @map("hour_id")
-  roomId    String @map("room_id")
-  subjectId String @map("subject_id")
-  teacherId String @map("teacher_id")
-  plan      plan[]
+  hourId    String     @map("hour_id")
+  roomId    String     @map("room_id")
+  subjectId String     @map("subject_id")
+  teacherId String     @map("teacher_id")
+  schedule  schedule[]
 
   // Relations
   teacher teacher @relation(fields: [teacherId], references: [id]) // One-to-many
@@ -228,7 +228,7 @@ model hour {
   no   Int    @default(0) @map("number_of")
 
   // Relation's fileds
-  lesson lesson[]
+  lesson     lesson[]
   attendance attendance[]
 
   @@map("Hours")
