@@ -48,6 +48,11 @@ const UnifyError = (res, err) => {
         message = "Action would violate table's relations.";
         break;
 
+      case "P2025":
+        message =
+          "One of given url params is invalid - entity with given ID does not exists";
+        break;
+
       default:
         message = err.meta.cause;
     }
