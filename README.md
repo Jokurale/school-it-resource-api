@@ -5,8 +5,6 @@
 
 ◼ Integrated with [_school-it-auth-server_](https://github.com/Jokurale/school-it-auth-server)
 
-<br>
-
 ## About project 🧧
 
 School-like API written during free time. Wanted to find out what am I capable of as well. <br>
@@ -17,13 +15,10 @@ Soon, it will be dockerized and used as real-life example of school-it school-ma
 Tons of hours spent writting more and more lines of code thought me enormous amounts of things. <br>
 From kinda 'production' way of using project's file structure, through utilizing knowledge to make
 development easier (Service and Validator Factorise) and writing tests, ending with ability to spot the smallest possible mistakes, bug-prone sections - oh now I notice A LOT
-<br>
 
 ## Backend implementation model 🗂
 
 Graphical representation will be available at README.ME of this [repo](https://github.com/Jokurale/school-it)
-
-<br>
 
 ## Installation process 🔨
 
@@ -52,10 +47,10 @@ Graphical representation will be available at README.ME of this [repo](https://g
   ```
   > Interactive Prisma Client should be launched under http://localhost:5555
 
-<br> <br>
+<br>
 
 - _DONE!_ 🎉
-  <br> <br> <br>
+  <br>
 
 ## Potential further changes 🧭
 
@@ -63,17 +58,13 @@ Graphical representation will be available at README.ME of this [repo](https://g
 - App cache
 - Reduce amount of repetitive code sections (Keep it DRY) - oh lot's of em (controllers)
 
-<br>
-
 ## Tests 📊
 
-```console
+```bash
 npm run test
 ```
 
 > Mocha test runner will run all \*_/_.test.ts files from "./tests" directory
-
-<br>
 
 ## Built With 📐
 
