@@ -9,6 +9,7 @@ const {
   removeSchedule,
   updateSchedule,
   removeLessonFromSchedule,
+  addLessonToSchedule,
   cleanUpSchedule,
 } = ScheduleController;
 
@@ -20,6 +21,7 @@ route.post("/", addSchedule);
 route.get("/:id", getScheduleById);
 route.delete("/:id", removeSchedule);
 route.put("/:id", updateSchedule);
+route.post("/:id/lessons/:lessonId", addLessonToSchedule);
 route.delete("/:id/lessons/all", cleanUpSchedule);
 route.delete("/:id/lessons/:lessonId", removeLessonFromSchedule);
 

@@ -52,6 +52,14 @@ const removeLessonFromSchedule = ash(async (req, res) => {
   return res.json(result);
 });
 
+const addLessonToSchedule = ash(async (req, res) => {
+  const { id, lessonId } = req.params;
+
+  const result = await ScheduleService.addLessonToSchedule(id, lessonId);
+
+  return res.json(result);
+});
+
 const cleanUpSchedule = ash(async (req, res) => {
   const { id } = req.params;
 
@@ -67,5 +75,6 @@ module.exports = {
   updateSchedule,
   removeSchedule,
   removeLessonFromSchedule,
+  addLessonToSchedule,
   cleanUpSchedule,
 };

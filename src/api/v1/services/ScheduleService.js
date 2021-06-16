@@ -25,6 +25,23 @@ const removeLessonFromSchedule = async (scheduleId, lessonId) => {
   return result;
 };
 
+const addLessonToSchedule = async (scheduleId, lessonId) => {
+  const result = await prisma.schedule.update({
+    where: {
+      id: scheduleId,
+    },
+    data: {
+      lesson: {
+        connect: {
+          id: lessonId,
+        },
+      },
+    },
+  });
+
+  return result;
+};
+
 const cleanUpSchedule = async (scheduleId) => {
   const { lesson: lessons } = await prisma.schedule.findFirst({
     where: {
@@ -73,5 +90,6 @@ module.exports = {
   updateSchedule: update,
   removeSchedule: remove,
   removeLessonFromSchedule,
+  addLessonToSchedule,
   cleanUpSchedule,
 };
