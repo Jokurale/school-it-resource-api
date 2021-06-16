@@ -87,18 +87,36 @@ const randomRoomId = async () => {
   return room.id;
 };
 
+const randomHourId = async () => {
+  const hours = await prisma.hour.findMany({
+    select: {
+      id: true,
+    },
+  });
+
+  const hour = hours[Math.floor(Math.random() * hours.length)];
+
+  return hour.id;
+};
+
+const randomDayName = () => {
+  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+
+  const day = days[Math.floor(Math.random() * days.length)];
+
+  return day;
+};
+
 const randomLesson = async () => {
-  const teacherId = await randomTeacherId();
-  const subjectId = await randomSubjectId();
-  const roomId = await randomRoomId();
+  const lessons = await prisma.lesson.findMany({
+    select: {
+      id: true,
+    },
+  });
 
-  const lesson = {
-    teacherId,
-    subjectId,
-    roomId,
-  };
+  const lesson = lessons[Math.floor(Math.random() * lessons.length)];
 
-  return lesson;
+  return lesson.id;
 };
 
 async function main() {
@@ -386,6 +404,21 @@ async function main() {
         description: faker.company.catchPhrase(),
         studentId: await randomStudentId(),
         teacherId: await randomTeacherId(),
+      },
+    });
+  }
+
+  // *** Lessons
+  console.log(chalk.cyan(`Seeding lessons...`));
+
+  for (let index = 0; index < 50; index++) {
+    await prisma.lesson.create({
+      data: {
+        day: randomDayName(),
+        subjectId: await randomSubjectId(),
+        teacherId: await randomTeacherId(),
+        hourId: await randomHourId(),
+        roomId: await randomRoomId(),
       },
     });
   }
