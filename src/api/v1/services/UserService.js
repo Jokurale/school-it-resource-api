@@ -5,6 +5,10 @@ const {
 } = require("../helpers");
 
 const {
+  constants: { PROTECTED_ROLES },
+} = require("../config");
+
+const {
   PasswordHelper: { hash },
 } = require("../helpers");
 
@@ -112,6 +116,29 @@ const addUser = async (user) => {
 };
 
 const removeUser = async (id) => {
+  // Prevent from removal one of protected roles
+  const orFilter = PROTECTED_ROLES.map((role) => ({
+    credential: {
+      role: {
+        equals: role,
+      },
+    },
+  }));
+
+  const users = await prisma.user.findMany({
+    where: {
+      OR: orFilter,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  const protected_ids = users.map((user) => user.id);
+
+  if (protected_ids.some((protected_ids) => protected_ids === id))
+    throw Error("Unable to remove proteced user.");
+
   const cleanUpOps = [];
 
   const user = await prisma.user.findFirst({
@@ -137,7 +164,7 @@ const removeUser = async (id) => {
   });
 
   // If no user was found, return default query result aka []
-  if (!user) return [];
+  if (!user) throw Error("User with given ID does not exists.");
 
   //Extract entity's id's to remove
   const { id: cid } = user.credential;
