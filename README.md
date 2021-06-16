@@ -7,6 +7,9 @@
 
 ## About project 🧧
 
+
+
+
 School-like API written during free time. Wanted to find out what am I capable of as well. <br>
 Lots of data models, many design patterns, lot's of overhead code in exchange for modularity
 
@@ -51,6 +54,29 @@ Graphical representation will be available at README.ME of this [repo](https://g
 
 - _DONE!_ 🎉
   <br>
+
+## Request flow a.k.a _Application architecture_ 🧱
+<div align="center">
+
+| &nbsp;&nbsp;&nbsp;&nbsp;Master Router | 
+| :--------   | 
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭   |
+| Middleware & Pipes | 
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Controllers |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Services * |  
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prisma Client |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Query Engine |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Database |
+
+
+\* Schema-based validation is included within Service block
+
+</div>
 
 ## Potential further changes 🧭
 
