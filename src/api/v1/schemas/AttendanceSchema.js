@@ -1,21 +1,25 @@
 const Joi = require("joi");
 
+const {
+  constants: { VALID_ATTENDANCE_TYPES, UUID_LENGTH },
+} = require("../config");
+
 const createSchema = Joi.object({
   date: Joi.date().required(),
   type: Joi.string()
-    .valid("Absent", "Present", "Excused absence", "Lateness")
+    .valid(...VALID_ATTENDANCE_TYPES)
     .required(),
-  hourId: Joi.string().length(36).required(),
-  teacherId: Joi.string().length(36).required(),
-  studentId: Joi.string().length(36).required(),
+  hourId: Joi.string().length(UUID_LENGTH).required(),
+  teacherId: Joi.string().length(UUID_LENGTH).required(),
+  studentId: Joi.string().length(UUID_LENGTH).required(),
 }).required();
 
 const updateSchema = Joi.object({
   date: Joi.date(),
-  type: Joi.string().valid("Absent", "Present", "Excused absence", "Lateness"),
-  hourId: Joi.string().length(36),
-  teacherId: Joi.string().length(36),
-  studentId: Joi.string().length(36),
+  type: Joi.string().valid(...VALID_ATTENDANCE_TYPES),
+  hourId: Joi.string().length(UUID_LENGTH),
+  teacherId: Joi.string().length(UUID_LENGTH),
+  studentId: Joi.string().length(UUID_LENGTH),
 }).required();
 
 module.exports = { createSchema, updateSchema };
