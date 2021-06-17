@@ -57,6 +57,7 @@ prepare = async () => {
     createTeacher(),
     createSubject(),
     createHour(),
+    createRoom(),
   ]);
 
   const prepTimeStop = Date.now();
@@ -131,6 +132,19 @@ createHour = async () => {
   mocks.hour = hour;
 
   log(`${check} Mock hour has been created.`);
+};
+
+createRoom = async () => {
+  const room = await prisma.room.create({
+    data: {
+      number: "100TEST",
+      type: "general",
+    },
+  });
+
+  mocks.room = room;
+
+  log(`${check} Mock room has been created.`);
 };
 
 createTeacher = async () => {

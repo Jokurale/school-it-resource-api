@@ -37,10 +37,11 @@ cleanup = async () => {
   log("Mock data has been parsed...");
 
   await Promise.all([
-    removeStudent(mock.student.id),
-    removeTeacher(mock.teacher.id),
-    removeSubject(mock.subject.id),
-    removeHour(mock.hour.id),
+    removeStudent(mock?.student?.id),
+    removeTeacher(mock?.teacher?.id),
+    removeSubject(mock?.subject?.id),
+    removeHour(mock?.hour?.id),
+    removeRoom(mock?.room?.id),
   ]);
 
   deleteFile();
@@ -85,6 +86,20 @@ const removeHour = async (id) => {
     log(`${check} Mock hour has been removed.`);
   } catch {
     log(`${cross} Mock hour removal failed.`);
+  }
+};
+
+const removeRoom = async (id) => {
+  try {
+    await prisma.room.delete({
+      where: {
+        id,
+      },
+    });
+
+    log(`${check} Mock room has been removed.`);
+  } catch {
+    log(`${cross} Mock room removal failed.`);
   }
 };
 

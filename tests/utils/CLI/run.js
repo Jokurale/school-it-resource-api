@@ -32,6 +32,7 @@ const tests = [
   "Attendance",
   "PersonalInfo",
   "Group",
+  "Lesson",
 ];
 
 describe("⚡ Loading school-it resource-api REST tests...", () => {
