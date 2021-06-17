@@ -13,6 +13,7 @@ const suite = new TestFactory({
   moduleName: "Room",
   path: "/rooms",
   app,
+  extraGetPaths: ["/lessons"],
 });
 
 suite
