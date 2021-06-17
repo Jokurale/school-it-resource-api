@@ -11,7 +11,7 @@ const {
   getRoomsLessons,
 } = RoomController;
 
-// ~~> Mounted as /subjects
+// ~~> Mounted as /rooms
 const route = Router();
 
 route.get("/", getAllRooms);

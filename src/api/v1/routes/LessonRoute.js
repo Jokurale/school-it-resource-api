@@ -5,7 +5,7 @@ const { LessonController } = require("../controllers");
 const { getAllLessons, getLessonById, addLesson, removeLesson, updateLesson } =
   LessonController;
 
-// ~~> Mounted as /Lessons
+// ~~> Mounted as /lessons
 const route = Router();
 
 route.get("/", getAllLessons);

@@ -10,7 +10,7 @@ const {
   updateAttendance,
 } = AttendanceController;
 
-// ~~> Mounted as /Attendances
+// ~~> Mounted as /attendance
 const route = Router();
 
 route.get("/", getAllAttendances);

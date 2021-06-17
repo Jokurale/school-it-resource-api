@@ -5,7 +5,7 @@ const { MarkController } = require("../controllers");
 const { getAllMarks, getMarkById, addMark, removeMark, updateMark } =
   MarkController;
 
-// ~~> Mounted as /homeworks
+// ~~> Mounted as /marks
 const route = Router();
 
 route.get("/", getAllMarks);
