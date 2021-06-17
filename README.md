@@ -87,7 +87,7 @@ Graphical representation will be available at README.ME of this [repo](https://g
 npm run test:ep
 ```
 
-<div align="center" ><img src="https://s6.gifyu.com/images/cli.gif"/></div>
+<div align="center"><img width="600" src="https://s6.gifyu.com/images/cli.gif"/></div>
 <br />
 
 > Now CLI test-runner will:
