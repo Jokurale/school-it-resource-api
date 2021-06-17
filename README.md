@@ -7,17 +7,14 @@
 
 ## About project 🧧
 
-
-
-
 School-like API written during free time. (Wanted to find out what am I capable of.) <br>
 Lots of data models, many design patterns, lots of overhead code in exchange for modularity
 
 Soon, it will be dockerized and used as real-life example of school-it school-management web app. <br>
 
-Tons of hours spent writting more and more lines of code thought me enormous amounts of things. <br>
+Tons of hours spent writhing more and more lines of code thought me enormous amounts of things. <br>
 From kinda 'production' way of using project's file structure, through utilizing knowledge to make
-development easier (Service and Validator Factorise) and writing tests, ending with ability to spot the smallest possible mistakes, bug-prone sections - oh now I notice A LOT
+development easier (Service and Validator Factories) and writing tests, ending with ability to spot the smallest possible mistakes, bug-prone sections - oh now I notice A LOT
 
 ## Backend implementation model 🗂
 
@@ -27,7 +24,7 @@ Graphical representation will be available at README.ME of this [repo](https://g
 
 - Clone or download and extract repo
 - Make sure your npm is up to date
-- Install all depenedencies via:
+- Install all dependencies via:
   ```bash
   npm install
   ```
@@ -42,9 +39,9 @@ Graphical representation will be available at README.ME of this [repo](https://g
   ```bash
   npx run seed
   ```
-  > Database will be regenerated to make sure it's empty, then, if everything's fine, seeder will be lanuched.
+  > Database will be regenerated to make sure it's empty, then, if everything's fine, seeder will be launched.
 
-* After seeding process have been completed, we should check our's mock data, time for Prisma Studio:
+* After seeding process have been completed, we should check ours mock data, time for Prisma Studio:
   ```bash
   npx run studio
   ```
@@ -56,23 +53,23 @@ Graphical representation will be available at README.ME of this [repo](https://g
   <br>
 
 ## Request flow a.k.a _Application architecture_ 🧱
+
 <div align="center">
 
-| &nbsp;&nbsp;&nbsp;&nbsp;Master Router | 
-| :--------   | 
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭   |
-| Middleware & Pipes | 
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭   |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Controllers |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭   |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Services * |  
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭   |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prisma Client |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭   |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Query Engine |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭   |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Database |
-
+| &nbsp;&nbsp;&nbsp;&nbsp;Master Router                                            |
+| :------------------------------------------------------------------------------- |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭 |
+| Middleware & Pipes                                                               |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Controllers                            |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Services \*                |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prisma Client                                |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Query Engine                                 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🠯🠭 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Database                         |
 
 \* Schema-based validation is included within Service block
 
@@ -87,10 +84,17 @@ Graphical representation will be available at README.ME of this [repo](https://g
 ## Tests 📊
 
 ```bash
-npm run test
+npm run test:ep
 ```
 
-> Mocha test runner will run all \*_/_.test.ts files from "./tests" directory
+<div align="center" ><img src="https://s6.gifyu.com/images/cli.gif"/></div>
+<br />
+
+> Now CLI test-runner will:
+>
+> - Launch test-prep _./tests/utils/CLI/prepare.js_
+> - Launch test-suites registered inside _./tests/utils/CLI/run.js_
+> - Launch test-cleanup _./tests/utils/CLI/cleanup.js_
 
 ## Built With 📐
 
