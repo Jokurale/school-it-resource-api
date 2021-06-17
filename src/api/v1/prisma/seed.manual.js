@@ -468,6 +468,19 @@ async function main() {
       });
     }
   }
+
+  console.log(chalk.cyan(`Seeding attendance records`));
+  for (let index = 0; index < 100; index++) {
+    await prisma.attendance.create({
+      data: {
+        type: "Present",
+        date: faker.date.past(),
+        studentId: await randomStudentId(),
+        teacherId: await randomTeacherId(),
+        hourId: await randomHourId(),
+      },
+    });
+  }
 }
 main()
   .catch((e) => {
