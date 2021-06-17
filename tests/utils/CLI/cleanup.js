@@ -42,6 +42,7 @@ cleanup = async () => {
     removeSubject(mock?.subject?.id),
     removeHour(mock?.hour?.id),
     removeRoom(mock?.room?.id),
+    removeGroups(mock?.groups),
   ]);
 
   deleteFile();
@@ -86,6 +87,22 @@ const removeHour = async (id) => {
     log(`${check} Mock hour has been removed.`);
   } catch {
     log(`${cross} Mock hour removal failed.`);
+  }
+};
+
+const removeGroups = async (groups) => {
+  try {
+    for (const group of groups) {
+      await prisma.group.delete({
+        where: {
+          id: group.id,
+        },
+      });
+    }
+
+    log(`${check} Mock groups have been removed.`);
+  } catch {
+    log(`${cross} Mock groups removal failed.`);
   }
 };
 

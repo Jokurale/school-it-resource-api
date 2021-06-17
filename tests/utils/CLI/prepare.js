@@ -58,6 +58,7 @@ prepare = async () => {
     createSubject(),
     createHour(),
     createRoom(),
+    createGroups(),
   ]);
 
   const prepTimeStop = Date.now();
@@ -145,6 +146,24 @@ createRoom = async () => {
   mocks.room = room;
 
   log(`${check} Mock room has been created.`);
+};
+
+createGroups = async () => {
+  const group1 = await prisma.group.create({
+    data: {
+      symbol: "10TEST2",
+    },
+  });
+
+  const group2 = await prisma.group.create({
+    data: {
+      symbol: "10TEST1",
+    },
+  });
+
+  mocks.groups = [group1, group2];
+
+  log(`${check} Mock groups have been created.`);
 };
 
 createTeacher = async () => {
