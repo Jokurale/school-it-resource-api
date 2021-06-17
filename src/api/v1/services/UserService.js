@@ -146,7 +146,7 @@ const removeUser = async (id) => {
   const protected_ids = users.map((user) => user.id);
 
   if (protected_ids.some((protected_ids) => protected_ids === id))
-    throw Error("Unable to remove proteced user.");
+    throw Error("Unable to remove protected user.");
 
   const cleanUpOps = [];
 
