@@ -6,7 +6,7 @@ const { ServiceFactory } = require("../factories");
 
 const factory = new ServiceFactory(prisma, validateGroup, "group");
 
-const { getAll, getById, add, update, remove } = factory.getServiceFunctions();
+const { getAll, getById, add, update } = factory.getServiceFunctions();
 
 const getSchedule = async (groupId) => {
   const plan = await prisma.group.findFirst({
@@ -23,6 +23,19 @@ const getSchedule = async (groupId) => {
   });
 
   return plan;
+};
+
+const getMembers = async (groupId) => {
+  const members = await prisma.group.findFirst({
+    where: {
+      id: groupId,
+    },
+    include: {
+      student: true,
+    },
+  });
+
+  return members;
 };
 
 const removeGroup = async (groupId) => {
@@ -66,4 +79,5 @@ module.exports = {
   updateGroup: update,
   removeGroup,
   getSchedule,
+  getMembers,
 };

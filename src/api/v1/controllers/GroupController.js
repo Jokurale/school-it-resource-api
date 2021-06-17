@@ -52,6 +52,14 @@ const getGroupsSchedule = ash(async (req, res) => {
   return res.json(result);
 });
 
+const getGroupsMembers = ash(async (req, res) => {
+  const { id } = req.params;
+
+  const result = await GroupService.getMembers(id);
+
+  return res.json(result);
+});
+
 module.exports = {
   getAllGroups,
   getGroupById,
@@ -59,4 +67,5 @@ module.exports = {
   updateGroup,
   removeGroup,
   getGroupsSchedule,
+  getGroupsMembers,
 };
