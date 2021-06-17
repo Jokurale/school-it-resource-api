@@ -12,6 +12,7 @@ process.env.NODE_ENV = "testing";
 // TODO: Integration testing: remove lesson from schedule
 // TODO: Integration testing: add user
 // TODO: Integration testing: remove user
+// TODO: Integration testing: update personal info
 
 const { readMockFile } = require("../ParseMockData");
 
@@ -29,6 +30,7 @@ const tests = [
   "Teacher",
   "User",
   "Attendance",
+  "PersonalInfo",
 ];
 
 describe("⚡ Loading school-it resource-api REST tests...", () => {
