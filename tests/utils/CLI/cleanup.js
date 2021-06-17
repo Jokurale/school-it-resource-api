@@ -40,6 +40,7 @@ cleanup = async () => {
     removeStudent(mock.student.id),
     removeTeacher(mock.teacher.id),
     removeSubject(mock.subject.id),
+    removeHour(mock.hour.id),
   ]);
 
   deleteFile();
@@ -70,6 +71,20 @@ const removeSubject = async (id) => {
     log(`${check} Mock subject has been removed.`);
   } catch {
     log(`${cross} Mock subject removal failed.`);
+  }
+};
+
+const removeHour = async (id) => {
+  try {
+    await prisma.hour.delete({
+      where: {
+        id,
+      },
+    });
+
+    log(`${check} Mock hour has been removed.`);
+  } catch {
+    log(`${cross} Mock hour removal failed.`);
   }
 };
 

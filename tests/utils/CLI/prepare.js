@@ -52,7 +52,12 @@ prepare = async () => {
 
   const prepTimeStart = Date.now();
 
-  await Promise.all([createStudent(), createTeacher(), createSubject()]);
+  await Promise.all([
+    createStudent(),
+    createTeacher(),
+    createSubject(),
+    createHour(),
+  ]);
 
   const prepTimeStop = Date.now();
 
@@ -112,6 +117,20 @@ createStudent = async () => {
   mocks.student = student;
 
   log(`${check} Mock student has been created.`);
+};
+
+createHour = async () => {
+  const hour = await prisma.hour.create({
+    data: {
+      from: "23:15",
+      to: "00:00",
+      no: 20,
+    },
+  });
+
+  mocks.hour = hour;
+
+  log(`${check} Mock hour has been created.`);
 };
 
 createTeacher = async () => {
