@@ -19,15 +19,15 @@ const suite = new TestFactory({
 suite
   .registerParam(new ResponseParam("id"))
   .registerParam(
-    new RequiredParam("personalInfoId", "024a26ac-2e93-45d1-b7b9-a2a79b5bdb61")
+    new RequiredParam("personalInfoId", global.mock.student.personalInfo.id)
   )
   .registerParam(new RequiredParam("address1", "Test Address"))
   .registerParam(new OptionalParam("address2"))
   .registerParam(new OptionalParam("address3"))
-  .registerParam(new RequiredParam("city", "Test city"))
+  .registerParam(new RequiredParam("city", "TestCity"))
   .registerParam(new RequiredParam("country", "UK"))
   .registerParam(new RequiredParam("postalCode", "10-100"))
-  .registerParam(new RequiredParam("state", "Test state"))
+  .registerParam(new RequiredParam("state", "TestState"))
   .registerParam(new UpdateParam("address2", "Test address to update 2"))
   .registerParam(new UpdateParam("address3", "Test address to update 3"))
   .setupGetTests()
