@@ -10,8 +10,8 @@
 
 
 
-School-like API written during free time. Wanted to find out what am I capable of as well. <br>
-Lots of data models, many design patterns, lot's of overhead code in exchange for modularity
+School-like API written during free time. (Wanted to find out what am I capable of.) <br>
+Lots of data models, many design patterns, lots of overhead code in exchange for modularity
 
 Soon, it will be dockerized and used as real-life example of school-it school-management web app. <br>
 
