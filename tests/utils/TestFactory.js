@@ -40,13 +40,13 @@ class TestFactory {
   }
 
   runResponseParamsCheck(baseObj) {
-    const cominbedParams = [
+    const combinedParams = [
       ...this.requiredParams,
       ...this.optionalParams,
       ...this.responseParams,
     ];
 
-    cominbedParams.forEach((param) =>
+    combinedParams.forEach((param) =>
       expect(baseObj).to.have.property(param.paramName)
     );
   }
