@@ -1,6 +1,18 @@
 process.env.NODE_ENV = "testing";
 // Test grabber
 
+// TODO: Integration testing: change user's password
+// TODO: Integration testing: get group's plan
+// TODO: Integration testing: get group's members
+// TODO: Integration testing: assign student to group
+// TODO: Integration testing: change student's group
+// TODO: Integration testing: remove student from group
+// TODO: Integration testing: clean up schedule
+// TODO: Integration testing: add lesson to schedule
+// TODO: Integration testing: remove lesson from schedule
+// TODO: Integration testing: add user
+// TODO: Integration testing: remove user
+
 const { readMockFile } = require("../ParseMockData");
 
 // Register global mock data
@@ -15,6 +27,7 @@ const tests = [
   "Student",
   "Subject",
   "Teacher",
+  "User",
   "Attendance",
 ];
 
