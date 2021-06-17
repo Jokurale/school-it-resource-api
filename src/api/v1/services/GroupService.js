@@ -43,13 +43,6 @@ const removeGroup = async (groupId) => {
     where: {
       id: groupId,
     },
-    include: {
-      plan: {
-        select: {
-          id: true,
-        },
-      },
-    },
   });
 
   // Disconnect any relations before deleting
