@@ -1,11 +1,12 @@
 {
-  "name": "school-managment-api",
+  "name": "school-management-api",
   "version": "1.0.0",
   "description": "School management SQL-based API",
   "main": "./src/index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
     "test:ep": "cd ./tests/utils/CLI && node prepare.js && npx mocha run.js -exit && node cleanup.js",
+    "test:cleanup": "cd ./tests/utils/CLI & node cleanup.js",
     "genprisma": "cd ./src/api/v1 && npx prisma generate",
     "seed": "cd ./src/api/v1 && prisma migrate reset --skip-generate && node ./prisma/seed.manual.js",
     "studio": "cd ./src/api/v1 && npx prisma studio"
