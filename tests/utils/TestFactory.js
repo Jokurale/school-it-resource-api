@@ -200,7 +200,7 @@ class TestFactory {
   setupDeleteTests() {
     const genericDeleteTestCase = () =>
       describe(`DELETE ${this.path}/{id}`, () => {
-        it("Recieves deleted object", (done) => {
+        it("Receives deleted object", (done) => {
           chai
             .request(this.app)
             .delete(`${this.path}/${this.tempId}`)
