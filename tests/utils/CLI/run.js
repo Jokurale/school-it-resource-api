@@ -7,7 +7,15 @@ const { readMockFile } = require("../ParseMockData");
 global.mock = readMockFile();
 
 // Register test names to run (API.<name>.test.js)
-const tests = ["Address", "Homework", "Mark"];
+const tests = [
+  "Address",
+  "Homework",
+  "Mark",
+  "Room",
+  "Student",
+  "Subject",
+  "Teacher",
+];
 
 describe("⚡ Loading school-it resource-api REST tests...", () => {
   tests.forEach((testName) => {
