@@ -110,20 +110,31 @@ const getAttendance = async (studentId) => {
   return attendance;
 };
 
-const assignToGroup = async (studentId, group) => {
-  const {
-    data: { symbol },
-  } = await validateGroup(group);
-
-  const groupId = await IDMapperHelper.symbolToGroupId(symbol);
-
+const assignToGroup = async (studentId, groupId) => {
   const result = await prisma.student.update({
     where: {
       id: studentId,
     },
     data: {
       group: {
-        set: {
+        connect: {
+          id: groupId,
+        },
+      },
+    },
+  });
+
+  return result;
+};
+
+const removeFromGroup = async (studentId, groupId) => {
+  const result = await prisma.student.update({
+    where: {
+      id: studentId,
+    },
+    data: {
+      group: {
+        disconnect: {
           id: groupId,
         },
       },
@@ -142,5 +153,6 @@ module.exports = {
   getAddresses,
   getGroup,
   assignToGroup,
+  removeFromGroup,
   getAttendance,
 };
