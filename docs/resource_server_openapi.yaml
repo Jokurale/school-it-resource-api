@@ -1,0 +1,1747 @@
+openapi: 3.0.0
+info:
+  title: School-it Resource Server API
+  contact:
+    name: "Michał Podsiadły"
+    url: "https://sdly.pl"
+    email: "podsiadly.michal@protonmail.com"
+  version: "1.3"
+servers:
+  - url: http://localhost:5000
+    variables: {}
+paths:
+  /addresses:
+    get:
+      tags:
+        - Address
+      summary: Get all address
+      operationId: Getalladdress
+      parameters: []
+      responses:
+        "201":
+          description: "Address was created successfully"
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Address
+      summary: Add new address
+      operationId: Addnewaddress
+      parameters: []
+      requestBody:
+        description: "Add new address, and links it to existing PersonalInfo model via personalInfoId"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddnewaddressRequest"
+            example:
+              personalInfoId: UUIDv4
+              address1: Test address
+              city: Lublin
+              state: Lubelskie
+              country: Poland
+              postalCode: 20-100
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /addresses/{addressId}:
+    get:
+      tags:
+        - Address
+      summary: Get address by ID
+      operationId: GetaddressbyID
+      parameters:
+        - in: path
+          name: addressId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: "Returns address object with given UUID"
+          headers: {}
+      deprecated: false
+    put:
+      tags:
+        - Address
+      summary: Update address
+      operationId: Updateaddress
+      parameters:
+        - in: path
+          name: addressId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateaddressRequest"
+            example:
+              personalInfoId: UUIDv4
+              address1: Test address
+              city: Lublin
+              state: Lubelskie
+              country: Poland
+              postalCode: 20-100
+              address2: Second line of address
+              address3: Third line of address
+        required: false
+      responses:
+        "200":
+          description: "Returns address object with changes applied"
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+        - Address
+      summary: Remove address
+      operationId: Removeaddress
+      parameters:
+        - in: path
+          name: addressId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: "Return deleted object"
+          headers: {}
+      deprecated: false
+  /attendance:
+    get:
+      tags:
+        - Attendance
+      summary: Get all attendance(s)
+      operationId: Getallattendance(s)
+      parameters: []
+      responses:
+        "200":
+          description: "Returns all attendance-related records"
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Attendance
+      summary: Add new attendance
+      operationId: Addnewattendance
+      parameters: []
+      requestBody:
+        description: "Add new attendance record, and links it to existing student, teacher and hour model via corresponding IDs"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddnewattendanceRequest"
+            example:
+              date: "1970-01-01"
+              type: Present
+              studentId: UUIDv4
+              teacherId: UUIDv4
+              hourId: UUIDv4
+        required: true
+      responses:
+        "201":
+          description: "Returns created attendance record"
+          headers: {}
+      deprecated: false
+  /attendance/{attendanceId}:
+    get:
+      tags:
+        - Attendance
+      summary: Get attendance by ID
+      operationId: GetattendancebyID
+      parameters:
+        - in: path
+          name: attendanceId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: "Return single attendance record with given ID"
+          headers: {}
+      deprecated: false
+    put:
+      tags:
+        - Attendance
+      summary: Update attendance
+      operationId: Updateattendance
+      parameters:
+        - in: path
+          name: attendanceId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateattendanceRequest"
+            example:
+              type: Excused absence
+        required: true
+      responses:
+        "200":
+          description: "Returns updated attendance record"
+          headers: {}
+        "400":
+          description: "Validation error or Relations error, one on given ids is invalid"
+      deprecated: false
+    delete:
+      tags:
+        - Attendance
+      summary: Remove attendance
+      operationId: Removeattendance
+      parameters:
+        - in: path
+          name: attendanceId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: "Returns deleted attendance record"
+          headers: {}
+      deprecated: false
+  /credentials/{login}:
+    post:
+      tags:
+        - Credential
+      summary: Change user's password
+      operationId: Changeuser'spassword
+      parameters:
+        - in: path
+          name: login
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      requestBody:
+        description: "Change user`s password"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Changeuser%27spasswordRequest"
+            example:
+              password: P@ssw0rd
+        required: true
+      responses:
+        "200":
+          description: "Operation result (Returns new credential's model record)"
+          headers: {}
+      deprecated: false
+  /groups:
+    get:
+      tags:
+        - Group
+      summary: Get all groups
+      operationId: Getallgroups
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Group
+      summary: Add group
+      operationId: Addgroup
+      parameters: []
+      requestBody:
+        description: "Add new group with given symbol"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddgroupRequest"
+            example:
+              symbol: 4GT
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /groups/{groupId}:
+    get:
+      tags:
+        - Group
+      summary: Get group by ID
+      operationId: GetgroupbyID
+      parameters:
+        - in: path
+          name: groupId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: "Returns group model with given ID"
+          headers: {}
+      deprecated: false
+    put:
+      tags:
+        - Group
+      summary: Update group
+      operationId: Updategroup
+      parameters:
+        - in: path
+          name: groupId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdategroupRequest"
+            example:
+              symbol: 5ET
+        required: true
+      responses:
+        "200":
+          description: "Returns updated group"
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+        - Group
+      summary: Remove group
+      operationId: Removegroup
+      parameters:
+        - in: path
+          name: groupId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: "Returns deleted group"
+          headers: {}
+      deprecated: false
+  /groups/{groupId}/schedule:
+    get:
+      tags:
+        - Group
+      summary: Get group's schedule
+      operationId: Getgroup'sschedule
+      parameters:
+        - in: path
+          name: groupId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: "Returns schedule (if exists) assigned to group with given ID"
+          headers: {}
+      deprecated: false
+  /groups/{groupId}/members:
+    get:
+      tags:
+        - Group
+      summary: Get group's members
+      operationId: Getgroup'smembers
+      parameters:
+        - in: path
+          name: groupId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: "Returns array of students (if exists) assigned to group with given ID"
+          headers: {}
+      deprecated: false
+  /homeworks:
+    get:
+      tags:
+        - Homework
+      summary: Get all homeworks
+      operationId: Getallhomeworks
+      parameters: []
+      responses:
+        "200":
+          description: "Lists all present homeworks"
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Homework
+      summary: Add new homework
+      operationId: Addnewhomework
+      parameters: []
+      requestBody:
+        description: "Add new homework to database and link it to existing student, teacher via ID's "
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddnewhomeworkRequest"
+            example:
+              createdAt: "1970-01-01"
+              deadline: "1970-02-01"
+              description: "Example homework description"
+              studentId: UUIDv4
+              teacherId: UUIDv5
+        required: true
+      responses:
+        "200":
+          description: "Returns newly created homework."
+          headers: {}
+      deprecated: false
+  /homeworks/{homeworkId}:
+    get:
+      tags:
+        - Homework
+      summary: Get homework by ID
+      operationId: GethomeworkbyID
+      parameters:
+        - in: path
+          name: homeworkId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    put:
+      tags:
+        - Homework
+      summary: Update homework
+      operationId: Updatehomework
+      parameters:
+        - in: path
+          name: homeworkId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: "Returns updated record"
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+        - Homework
+      summary: Remove homework
+      operationId: Removehomework
+      parameters:
+        - in: path
+          name: homeworkId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: "Returns deleted record"
+          headers: {}
+      deprecated: false
+  /lessons:
+    get:
+      tags:
+        - Lesson
+      summary: Get all lessons
+      operationId: Getalllessons
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Lesson
+      summary: Add new lesson
+      operationId: Addnewlesson
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddnewlessonRequest"
+            example:
+              day: Monday
+              hourId: 0826debd-9cfe-4d06-a28a-5ab9c949887d
+              roomId: 07fe9956-7387-4036-be68-1c58beb08927
+              subjectId: 1554bfe4-7a8d-4308-9e2c-6df40d28fe69
+              teacherId: 01a38a8b-6fb2-457e-ac6e-10e30cb8b10f
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /lessons/{lessonId}:
+    get:
+      tags:
+        - Lesson
+      summary: Get lessons by ID
+      operationId: GetlessonsbyID
+      parameters:
+        - in: path
+          name: lessonId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    put:
+      tags:
+        - Lesson
+      summary: Update lesson
+      operationId: Updatelesson
+      parameters:
+        - in: path
+          name: lessonId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatelessonRequest"
+            example:
+              day: Monday
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+        - Lesson
+      summary: Remove lesson
+      operationId: Removelesson
+      parameters:
+        - in: path
+          name: lessonId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /marks:
+    get:
+      tags:
+        - Mark
+      summary: Get all marks
+      operationId: Getallmarks
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Mark
+      summary: Add new mark
+      operationId: Addnewmark
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddnewmarkRequest"
+            example:
+              createdAt: "{{$randomDatePast}}"
+              description: Some kind of good description
+              mark: "6"
+              weight: 10
+              studentId: 024ee216-3e2c-4ae2-a9d4-3feb38bc35ca
+              teacherId: 07533bce-f01f-48a2-a7a7-ca553e9dc18f
+              subjectId: 068f7cf0-9ecc-4e13-9e9e-70450b6119c1
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /marks/{markId}:
+    put:
+      tags:
+        - Mark
+      summary: Update mark
+      operationId: Updatemark
+      parameters:
+        - in: path
+          name: markId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatemarkRequest"
+            example:
+              description: Some kind of good description
+              mark: "6"
+              weight: 10
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+        - Mark
+      summary: Get mark by ID
+      operationId: GetmarkbyID
+      parameters:
+        - in: path
+          name: markId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+        - Mark
+      summary: Remove mark
+      operationId: Removemark
+      parameters:
+        - in: path
+          name: markId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /personalinfos:
+    get:
+      tags:
+        - PersonalInfo
+      summary: Get all personal infos
+      operationId: Getallpersonalinfos
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /personalinfos/{personalInfoId}:
+    get:
+      tags:
+        - PersonalInfo
+      summary: Get personal info by ID
+      operationId: GetpersonalinfobyID
+      parameters:
+        - in: path
+          name: personalInfoId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    put:
+      tags:
+        - PersonalInfo
+      summary: Update personal info
+      operationId: Updatepersonalinfo
+      parameters:
+        - in: path
+          name: personalInfoId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /schedules:
+    get:
+      tags:
+        - Schedule
+      summary: Get all schedules
+      operationId: Getallschedules
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Schedule
+      summary: Add schedule
+      operationId: Addschedule
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddscheduleRequest"
+            example:
+              groupId: cbdf2686-1a42-4dc7-84ee-548bb46ffb08
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /schedules/{scheduleId}:
+    get:
+      tags:
+        - Schedule
+      summary: Get schedule  by ID
+      operationId: GetschedulebyID
+      parameters:
+        - in: path
+          name: scheduleId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    put:
+      tags:
+        - Schedule
+      summary: Update schedule
+      operationId: Updateschedule
+      parameters:
+        - in: path
+          name: scheduleId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatescheduleRequest"
+            example:
+              groupId: 21d48ce5-ca15-4e8c-b318-2ead37bedc1d
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+        - Schedule
+      summary: Remove schedule
+      operationId: Removeschedule
+      parameters:
+        - in: path
+          name: scheduleId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /schedules/{scheduleId}/lessons/all:
+    delete:
+      tags:
+        - Schedule
+      summary: Clean up schedule
+      operationId: Cleanupschedule
+      parameters:
+        - in: path
+          name: scheduleId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /schedules/{scheduleId}/lessons/{lessonId}:
+    delete:
+      tags:
+        - Schedule
+      summary: Remove lesson from schedule
+      operationId: Removelessonfromschedule
+      parameters:
+        - in: path
+          name: scheduleId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+        - in: path
+          name: lessonId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Schedule
+      summary: Add lesson to schedule
+      operationId: Addlessontoschedule
+      parameters:
+        - in: path
+          name: scheduleId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+        - in: path
+          name: lessonId
+          schema:
+            type: string
+          required: true
+          description: Valid UUIDv4 of target resource
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /auth/{login}:
+    get:
+      tags:
+        - Special
+      summary: /auth/
+      operationId: /auth/
+      parameters:
+        - in: path
+          name: login
+          schema:
+            type: string
+          required: true
+          description: Valid iser login
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /students/f0c784ef-6511-4567-8cab-1a442416baa5/homeworks:
+    get:
+      tags:
+        - Students
+      summary: Get student's homeworks
+      operationId: Getstudent'shomeworks
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /students/f0c784ef-6511-4567-8cab-1a442416baa5/marks:
+    get:
+      tags:
+        - Students
+      summary: Get student's marks
+      operationId: Getstudent'smarks
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /students/f0c784ef-6511-4567-8cab-1a442416baa5/addresses:
+    get:
+      tags:
+        - Students
+      summary: Get student's addresses
+      operationId: Getstudent'saddresses
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /students/f0c784ef-6511-4567-8cab-1a442416baa5/profile:
+    get:
+      tags:
+        - Students
+      summary: Get student's personal info
+      operationId: Getstudent'spersonalinfo
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /students/0034eabc-0aaa-4a34-9191-6627dd31e5fc/attendance:
+    get:
+      tags:
+        - Students
+      summary: Get student's attendance
+      operationId: Getstudent'sattendance
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /students/0034eabc-0aaa-4a34-9191-6627dd31e5fc:
+    get:
+      tags:
+        - Students
+      summary: Get student by ID
+      operationId: GetstudentbyID
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /students:
+    get:
+      tags:
+        - Students
+      summary: Get all students
+      operationId: Getallstudents
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /students/f0c784ef-6511-4567-8cab-1a442416baa5/group:
+    get:
+      tags:
+        - Students
+      summary: Get student's group
+      operationId: Getstudent'sgroup
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Students
+      summary: Change student's group
+      operationId: Changestudent'sgroup
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Changestudent%27sgroupRequest"
+            example:
+              symbol: 4EGT
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /rooms:
+    get:
+      tags:
+        - Room
+      summary: Get all rooms
+      operationId: Getallrooms
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Room
+      summary: Add new room
+      operationId: Addnewroom
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddnewroomRequest"
+            example:
+              type: Chemistry - Labb
+              number: 104A
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /rooms/07fe9956-7387-4036-be68-1c58beb08927:
+    get:
+      tags:
+        - Room
+      summary: Get room by ID
+      operationId: GetroombyID
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /rooms/07fe9956-7387-4036-be68-1c58beb08927/lessons:
+    get:
+      tags:
+        - Room
+      summary: Get room's lessons
+      operationId: Getroom'slessons
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /rooms/832b73bc-6534-44c1-b0c9-b3cca1d5496a:
+    put:
+      tags:
+        - Room
+      summary: Update room
+      operationId: Updateroom
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateroomRequest"
+            example:
+              number: "101"
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /rooms/99cae31f-a19d-4da3-a7a4-a41f3606672f:
+    delete:
+      tags:
+        - Room
+      summary: Remove room
+      operationId: Removeroom
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /subjects:
+    get:
+      tags:
+        - Subject
+      summary: Get all subjects
+      operationId: Getallsubjects
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Subject
+      summary: Add new subject
+      operationId: Addnewsubject
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddnewsubjectRequest"
+            example:
+              name: "{{$randomCompanyName}}"
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /subjects/22fe8b17-dd62-460c-9615-80a18ae7f7c4:
+    get:
+      tags:
+        - Subject
+      summary: Get subject by ID
+      operationId: GetsubjectbyID
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /subjects/fd4076a0-8127-4b23-9e79-352d65f2bcfb:
+    put:
+      tags:
+        - Subject
+      summary: Update subject
+      operationId: Updatesubject
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatesubjectRequest"
+            example:
+              name: Totallly nice memememe
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /subjects/8da28258-9042-434c-91a5-c7ae94a16ecf:
+    delete:
+      tags:
+        - Subject
+      summary: Remove subject
+      operationId: Removesubject
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /teachers:
+    get:
+      tags:
+        - Teacher
+      summary: Get all teachers
+      operationId: Getallteachers
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /teachers/07533bce-f01f-48a2-a7a7-ca553e9dc18f:
+    get:
+      tags:
+        - Teacher
+      summary: Get teacher by ID
+      operationId: GetteacherbyID
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /teachers/07533bce-f01f-48a2-a7a7-ca553e9dc18f/homeworks:
+    get:
+      tags:
+        - Teacher
+      summary: Get teachers's homeworks
+      operationId: Getteachers'shomeworks
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /teachers/07533bce-f01f-48a2-a7a7-ca553e9dc18f/marks:
+    get:
+      tags:
+        - Teacher
+      summary: Get teacher's marks
+      operationId: Getteacher'smarks
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /teachers/07533bce-f01f-48a2-a7a7-ca553e9dc18f/addresses:
+    get:
+      tags:
+        - Teacher
+      summary: Get teacher's addresses
+      operationId: Getteacher'saddresses
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /teachers/07533bce-f01f-48a2-a7a7-ca553e9dc18f/profile:
+    get:
+      tags:
+        - Teacher
+      summary: Get teacher's personal info
+      operationId: Getteacher'spersonalinfo
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /users:
+    get:
+      tags:
+        - User
+      summary: Get all users
+      operationId: Getallusers
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - User
+      summary: Add new user
+      operationId: Addnewuser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddnewuserRequest"
+            example:
+              credential:
+                login: test
+                password: P@ssword
+                role: student
+              personalInfo:
+                firstname: firstname
+                lastname: lastname
+                email: test@gmailaaa.com
+                dateOfBirth: 1970-01-01
+              address:
+                - address1: XD
+                  city: Łęczna
+                  state: XD
+                  country: Polska
+                  postalCode: 23-107
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /users/001ebf15-0d20-409a-aa1f-4afec1a6f852:
+    get:
+      tags:
+        - User
+      summary: Get users by ID
+      operationId: GetusersbyID
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /users/9c18b506-5227-4c8f-85dd-8325110b9bee/addresses:
+    get:
+      tags:
+        - User
+      summary: Get users's addresses
+      operationId: Getusers'saddresses
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /users/9c18b506-5227-4c8f-85dd-8325110b9bee/profile:
+    get:
+      tags:
+        - User
+      summary: Get users's personal info
+      operationId: Getusers'spersonalinfo
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /users/797390fe-cab7-4b54-9e1b-29133b788257:
+    delete:
+      tags:
+        - User
+      summary: Remove user
+      operationId: Removeuser
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    AddnewaddressRequest:
+      title: AddnewaddressRequest
+      required:
+        - personalInfoId
+        - address1
+        - city
+        - state
+        - country
+        - postalCode
+      type: object
+      properties:
+        personalInfoId:
+          type: string
+        address1:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        postalCode:
+          type: string
+      example:
+        personalInfoId: 014ca939-c09d-44d2-88b1-d9f078d9a3a9
+        address1: Test address
+        city: Lublin
+        state: Lubelskie
+        country: Poland
+        postalCode: 23-107
+    UpdateaddressRequest:
+      title: UpdateaddressRequest
+      required:
+        - address2
+        - address3
+      type: object
+      properties:
+        address2:
+          type: string
+        address3:
+          type: string
+      example:
+        address2: XDDD
+        address3: XD
+    AddnewattendanceRequest:
+      title: AddnewattendanceRequest
+      required:
+        - date
+        - type
+        - studentId
+        - teacherId
+        - hourId
+      type: object
+      properties:
+        date:
+          type: string
+        type:
+          type: string
+        studentId:
+          type: string
+        teacherId:
+          type: string
+        hourId:
+          type: string
+      example:
+        date: 1970-01-01
+        type: Present
+        studentId: 00f90966-bfe4-4948-9b6a-66e028196b7c
+        teacherId: 0121e3c4-42f3-40b6-a36a-893acdf105dd
+        hourId: 0cf3ac38-5071-4722-9d30-8d53120abc85
+    UpdateattendanceRequest:
+      title: UpdateattendanceRequest
+      required:
+        - type
+      type: object
+      properties:
+        type:
+          type: string
+      example:
+        type: Excused absence
+    Changeuser'spasswordRequest:
+      title: Changeuser'spasswordRequest
+      required:
+        - password
+      type: object
+      properties:
+        password:
+          type: string
+      example:
+        password: P@ssw0rd
+    AddgroupRequest:
+      title: AddgroupRequest
+      required:
+        - symbol
+      type: object
+      properties:
+        symbol:
+          type: string
+      example:
+        symbol: 4GTT
+    UpdategroupRequest:
+      title: UpdategroupRequest
+      required:
+        - symbol
+      type: object
+      properties:
+        symbol:
+          type: string
+      example:
+        symbol: 5ET
+    AddnewhomeworkRequest:
+      title: AddnewhomeworkRequest
+      required:
+        - createdAt
+        - deadline
+        - description
+        - studentId
+        - teacherId
+      type: object
+      properties:
+        createdAt:
+          type: string
+        deadline:
+          type: string
+        description:
+          type: string
+        studentId:
+          type: string
+        teacherId:
+          type: string
+      example:
+        createdAt: "{{$randomDatePast}}"
+        deadline: "{{$randomDatePast}}"
+        description: "{{$randomCatchPhrase}}"
+        studentId: dce4609b-44ec-41b8-9695-25cf631ef614
+        teacherId: ba92949d-22ee-42fd-bb2a-696eff1ada62
+    AddnewlessonRequest:
+      title: AddnewlessonRequest
+      required:
+        - day
+        - hourId
+        - roomId
+        - subjectId
+        - teacherId
+      type: object
+      properties:
+        day:
+          type: string
+        hourId:
+          type: string
+        roomId:
+          type: string
+        subjectId:
+          type: string
+        teacherId:
+          type: string
+      example:
+        day: Monday
+        hourId: 0826debd-9cfe-4d06-a28a-5ab9c949887d
+        roomId: 07fe9956-7387-4036-be68-1c58beb08927
+        subjectId: 1554bfe4-7a8d-4308-9e2c-6df40d28fe69
+        teacherId: 01a38a8b-6fb2-457e-ac6e-10e30cb8b10f
+    UpdatelessonRequest:
+      title: UpdatelessonRequest
+      required:
+        - day
+      type: object
+      properties:
+        day:
+          type: string
+      example:
+        day: Monday
+    AddnewmarkRequest:
+      title: AddnewmarkRequest
+      required:
+        - createdAt
+        - description
+        - mark
+        - weight
+        - studentId
+        - teacherId
+        - subjectId
+      type: object
+      properties:
+        createdAt:
+          type: string
+        description:
+          type: string
+        mark:
+          type: string
+        weight:
+          type: integer
+          format: int32
+        studentId:
+          type: string
+        teacherId:
+          type: string
+        subjectId:
+          type: string
+      example:
+        createdAt: "{{$randomDatePast}}"
+        description: Some kind of good description
+        mark: "6"
+        weight: 10
+        studentId: 024ee216-3e2c-4ae2-a9d4-3feb38bc35ca
+        teacherId: 07533bce-f01f-48a2-a7a7-ca553e9dc18f
+        subjectId: 068f7cf0-9ecc-4e13-9e9e-70450b6119c1
+    UpdatemarkRequest:
+      title: UpdatemarkRequest
+      required:
+        - description
+        - mark
+        - weight
+      type: object
+      properties:
+        description:
+          type: string
+        mark:
+          type: string
+        weight:
+          type: integer
+          format: int32
+      example:
+        description: Some kind of good description
+        mark: "6"
+        weight: 10
+    AddscheduleRequest:
+      title: AddscheduleRequest
+      required:
+        - groupId
+      type: object
+      properties:
+        groupId:
+          type: string
+      example:
+        groupId: cbdf2686-1a42-4dc7-84ee-548bb46ffb08
+    UpdatescheduleRequest:
+      title: UpdatescheduleRequest
+      required:
+        - groupId
+      type: object
+      properties:
+        groupId:
+          type: string
+      example:
+        groupId: 21d48ce5-ca15-4e8c-b318-2ead37bedc1d
+    Changestudent'sgroupRequest:
+      title: Changestudent'sgroupRequest
+      required:
+        - symbol
+      type: object
+      properties:
+        symbol:
+          type: string
+      example:
+        symbol: 4EGT
+    AddnewroomRequest:
+      title: AddnewroomRequest
+      required:
+        - type
+        - number
+      type: object
+      properties:
+        type:
+          type: string
+        number:
+          type: string
+      example:
+        type: Chemistry - Labb
+        number: 104A
+    UpdateroomRequest:
+      title: UpdateroomRequest
+      required:
+        - number
+      type: object
+      properties:
+        number:
+          type: string
+      example:
+        number: "101"
+    AddnewsubjectRequest:
+      title: AddnewsubjectRequest
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: "{{$randomCompanyName}}"
+    UpdatesubjectRequest:
+      title: UpdatesubjectRequest
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: Totallly nice memememe
+    AddnewuserRequest:
+      title: AddnewuserRequest
+      required:
+        - credential
+        - personalInfo
+        - address
+      type: object
+      properties:
+        credential:
+          $ref: "#/components/schemas/Credential"
+        personalInfo:
+          $ref: "#/components/schemas/PersonalInfo"
+        address:
+          type: array
+          items:
+            $ref: "#/components/schemas/Address"
+          description: ""
+      example:
+        credential:
+          login: test
+          password: P@ssword
+          role: student
+        personalInfo:
+          firstname: firstname
+          lastname: lastname
+          email: test@gmailaaa.com
+          dateOfBirth: 1970-01-01
+        address:
+          - address1: XD
+            city: Łęczna
+            state: XD
+            country: Polska
+            postalCode: 23-107
+    Credential:
+      title: Credential
+      required:
+        - login
+        - password
+        - role
+      type: object
+      properties:
+        login:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+      example:
+        login: test
+        password: P@ssword
+        role: student
+    PersonalInfo:
+      title: PersonalInfo
+      required:
+        - firstname
+        - lastname
+        - email
+        - dateOfBirth
+      type: object
+      properties:
+        firstname:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        dateOfBirth:
+          type: string
+      example:
+        firstname: firstname
+        lastname: lastname
+        email: test@gmailaaa.com
+        dateOfBirth: 1970-01-01
+    Address:
+      title: Address
+      required:
+        - address1
+        - city
+        - state
+        - country
+        - postalCode
+      type: object
+      properties:
+        address1:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        postalCode:
+          type: string
+      example:
+        address1: XD
+        city: Łęczna
+        state: XD
+        country: Polska
+        postalCode: 23-107
+tags:
+  - name: Address
+  - name: Attendance
+  - name: Credential
+  - name: Group
+  - name: Homework
+  - name: Lesson
+  - name: Mark
+  - name: PersonalInfo
+  - name: Schedule
+  - name: Special
+  - name: Students
+  - name: Room
+  - name: Subject
+  - name: Teacher
+  - name: User
