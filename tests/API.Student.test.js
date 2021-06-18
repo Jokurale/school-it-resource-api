@@ -14,7 +14,7 @@ const suite = new TestFactory({
     "/profile",
     "/personalInfo",
     "/addresses",
-    "/group",
+    "/groups",
   ],
 });
 
