@@ -13,8 +13,6 @@ const app = require("../src/index");
 // ~~ TODO: Integration testing: clean up schedule
 // ~~ TODO: Integration testing: add lesson to schedule
 // ~~ TODO: Integration testing: remove lesson from schedule
-// TODO: Integration testing: add user
-// TODO: Integration testing: remove user
 // TODO: Integration testing: update personal info
 
 describe("### Integration tests ###", () => {
@@ -26,6 +24,7 @@ describe("### Integration tests ###", () => {
   assignLessonToSchedule();
   removeLessonFromSchedule();
   cleanUpSchedule();
+  updatePersonalInfo();
 });
 
 // Test cases
@@ -98,29 +97,11 @@ function removeStudentFromGroup() {
 
 function assignLessonToSchedule() {
   describe(`POST /schedules/{scheduleId}/lessons/{lessonId}`, () => {
-    it("Assigns first lesson to schedule", (done) => {
+    it("Assigns lesson to schedule", (done) => {
       chai
         .request(app)
         .post(
           `/schedules/${global.mock.schedule.id}/lessons/${global.mock.lessons[0].id}`
-        )
-        .end((err, res) => {
-          expect(res).to.have.status(200);
-          expect(res).to.have.property("body");
-
-          expect(res.body).to.not.have.property("error");
-          expect(res.body).to.be.an("object");
-          expect(res.body).to.have.property("id");
-          expect(res.body).to.have.property("groupId");
-
-          done();
-        });
-    });
-    it("Assigns second lesson to schedule", (done) => {
-      chai
-        .request(app)
-        .post(
-          `/schedules/${global.mock.schedule.id}/lessons/${global.mock.lessons[1].id}`
         )
         .end((err, res) => {
           expect(res).to.have.status(200);
@@ -177,4 +158,30 @@ function cleanUpSchedule() {
         });
     });
   });
+}
+
+function updatePersonalInfo() {
+  {
+    describe(`PUT /personalinfos/{personalInfoId}`, () => {
+      it("Updates personal informations", (done) => {
+        chai
+          .request(app)
+          .put(`/personalinfos/${global.mock.student.personalInfo.id}`)
+          .send({
+            middlename: "TestMiddlename",
+          })
+          .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res).to.have.property("body");
+
+            expect(res.body).to.not.have.property("error");
+            expect(res.body).to.be.an("object");
+            expect(res.body).to.have.property("middlename");
+            expect(res.body.middlename).to.be.eq("TestMiddlename");
+
+            done();
+          });
+      });
+    });
+  }
 }
