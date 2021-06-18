@@ -56,8 +56,7 @@ const cleanUpSchedule = async (scheduleId) => {
     },
   });
 
-  if (lessons.length <= 0)
-    throw Error("Schedule with given ID has no lessons assigned.");
+  if (lessons.length <= 0) return [];
 
   const lessonsIds = lessons.map((lesson) => lesson.id);
 
