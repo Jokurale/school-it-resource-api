@@ -59,7 +59,11 @@ prepare = async () => {
     createHour(),
     createRoom(),
     createGroups(),
+    createLessons(),
   ]);
+
+  // Schedule depends on lessons and group
+  await createSchedule();
 
   const prepTimeStop = Date.now();
 
@@ -149,21 +153,21 @@ createRoom = async () => {
 };
 
 createGroups = async () => {
-  const group1 = await prisma.group.create({
-    data: {
-      symbol: "10TEST2",
-    },
-  });
+  const groups = [];
 
-  const group2 = await prisma.group.create({
-    data: {
-      symbol: "10TEST1",
-    },
-  });
+  for (let index = 0; index < 3; index++) {
+    const group = await prisma.group.create({
+      data: {
+        symbol: `10TEST${index + 1}`,
+      },
+    });
 
-  mocks.groups = [group1, group2];
+    groups.push(group);
+  }
 
-  log(`${check} Mock groups have been created.`);
+  mocks.groups = groups;
+
+  log(`${check} Mock groups (3) have been created.`);
 };
 
 createTeacher = async () => {
@@ -226,6 +230,41 @@ createSubject = async () => {
 
   mocks.subject = subject;
   log(`${check} Mock subject has been created.`);
+};
+
+createLessons = async () => {
+  const lessons = [];
+
+  for (let index = 0; index < 5; index++) {
+    const lesson = await prisma.lesson.create({
+      data: {
+        day: randomDayName(),
+        subjectId: await randomSubjectId(),
+        teacherId: await randomTeacherId(),
+        hourId: await randomHourId(),
+        roomId: await randomRoomId(),
+      },
+    });
+
+    lessons.push(lesson);
+  }
+
+  mocks.lessons = lessons;
+  log(`${check} Mock lessons (${lessons.length}) have been created.`);
+};
+
+createSchedule = async () => {
+  const schedule = await prisma.schedule.create({
+    data: {
+      group: {
+        connect: { id: mocks.groups[2].id },
+      },
+    },
+  });
+
+  mocks.schedule = schedule;
+
+  log(`${check} Mock schedule has been created.`);
 };
 
 prepare().then(() => save());

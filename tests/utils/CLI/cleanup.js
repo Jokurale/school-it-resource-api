@@ -36,14 +36,21 @@ cleanup = async () => {
 
   log("Mock data has been parsed...");
 
+  // Due to relations ( schedule 1 <-> n lessons)
+  await removeSchedule(mock?.schedule?.id);
+
+  await removeLessons(mock?.lessons);
+
   await Promise.all([
     removeStudent(mock?.student?.id),
     removeTeacher(mock?.teacher?.id),
-    removeSubject(mock?.subject?.id),
     removeHour(mock?.hour?.id),
     removeRoom(mock?.room?.id),
-    removeGroups(mock?.groups),
   ]);
+
+  await removeGroups(mock?.groups);
+  // Due to relation ( lessons n <-> 1 subject)
+  await removeSubject(mock?.subject?.id);
 
   deleteFile();
 
@@ -85,7 +92,8 @@ const removeHour = async (id) => {
     });
 
     log(`${check} Mock hour has been removed.`);
-  } catch {
+  } catch (e) {
+    console.log(e);
     log(`${cross} Mock hour removal failed.`);
   }
 };
@@ -127,6 +135,36 @@ const removeTeacher = async (id) => {
     log(`${check} Mock teacher has been removed.`);
   } catch (e) {
     log(`${cross} Mock teacher removal failed.`);
+  }
+};
+
+const removeLessons = async (lessons) => {
+  try {
+    for (const lesson of lessons) {
+      await prisma.lesson.delete({
+        where: {
+          id: lesson.id,
+        },
+      });
+    }
+
+    log(`${check} Mock lessons have been removed.`);
+  } catch {
+    log(`${cross} Mock lessons removal failed.`);
+  }
+};
+
+const removeSchedule = async (id) => {
+  try {
+    await prisma.schedule.delete({
+      where: {
+        id,
+      },
+    });
+
+    log(`${check} Mock schedule has been removed.`);
+  } catch {
+    log(`${cross} Mock schedule removal failed.`);
   }
 };
 
