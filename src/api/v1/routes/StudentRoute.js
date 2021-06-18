@@ -9,7 +9,7 @@ const {
   getStudentsAddresses,
   getStudentsMarks,
   getStudentsPersonalInfo,
-  getStudentsGroup,
+  getStudentsGroups,
   getStudentsAttendance,
   assignStudentToGroup,
   removeStudentFromGroup,
@@ -24,7 +24,7 @@ route.get("/:id/homeworks", getStudentsHomeworks);
 route.get("/:id/addresses", getStudentsAddresses);
 route.get("/:id/marks", getStudentsMarks);
 route.get("/:id/personalInfo", getStudentsPersonalInfo);
-route.get("/:id/group", getStudentsGroup);
+route.get("/:id/groups", getStudentsGroups);
 route.post("/:id/group/:groupId", assignStudentToGroup);
 route.delete("/:id/group/:groupId", removeStudentFromGroup);
 route.get("/:id/attendance", getStudentsAttendance);

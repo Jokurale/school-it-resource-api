@@ -48,10 +48,10 @@ const getStudentsPersonalInfo = ash(async (req, res) => {
   return res.json(personalInfo);
 });
 
-const getStudentsGroup = ash(async (req, res) => {
+const getStudentsGroups = ash(async (req, res) => {
   const { id: studentId } = req.params;
 
-  const group = await StudentService.getGroup(studentId);
+  const group = await StudentService.getGroups(studentId);
 
   return res.json(group);
 });
@@ -87,7 +87,7 @@ module.exports = {
   getStudentsAddresses,
   getStudentsMarks,
   getStudentsPersonalInfo,
-  getStudentsGroup,
+  getStudentsGroups,
   getStudentsAttendance,
   assignStudentToGroup,
   removeStudentFromGroup,

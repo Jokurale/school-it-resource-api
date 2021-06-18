@@ -84,7 +84,7 @@ const getAddresses = async (studentId) => {
   return addresses;
 };
 
-const getGroup = async (studentId) => {
+const getGroups = async (studentId) => {
   const group = await prisma.student.findFirst({
     where: {
       id: studentId,
@@ -151,7 +151,7 @@ module.exports = {
   getStudentById,
   getPersonalInfo,
   getAddresses,
-  getGroup,
+  getGroups,
   assignToGroup,
   removeFromGroup,
   getAttendance,
