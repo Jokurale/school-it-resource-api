@@ -52,6 +52,9 @@ Graphical representation will be available at README.ME of this [repo](https://g
 - _DONE!_ 🎉
   <br>
 
+## Swagger (OpenAPI 3.0) Documentation 📃
+[Available here _(in progress)_](https://app.swaggerhub.com/apis/Jokurale/resource-server-school-it/1.3)
+
 ## Request flow a.k.a _Application architecture_ 🧱
 
 <div align="center">
