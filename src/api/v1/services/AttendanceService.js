@@ -8,13 +8,13 @@ const factory = new ServiceFactory(prisma, validateAttendance, "attendance");
 
 const { getAll, getById, update, remove } = factory.getServiceFunctions();
 
-const addAttendance = async (attendace) => {
-  const validAttendace = await validateAttendance(attendace);
+const addAttendance = async (attendance) => {
+  const validAttendance = await validateAttendance(attendance);
 
   // Check if exact same attendance record is present in database
   const {
     data: { date, studentId, hourId },
-  } = validAttendace;
+  } = validAttendance;
 
   const attendanceRecord = await prisma.attendance.findFirst({
     where: {
@@ -29,8 +29,8 @@ const addAttendance = async (attendace) => {
       "Attendance record for given time and student is already present. Please update existing one if needed."
     );
 
-  // Procced if everything's ok
-  const result = await prisma.attendance.create(validAttendace);
+  // Proceed if everything's ok
+  const result = await prisma.attendance.create(validAttendance);
 
   return result;
 };
