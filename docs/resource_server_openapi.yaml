@@ -879,7 +879,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /students/f0c784ef-6511-4567-8cab-1a442416baa5/homeworks:
+  /students/{studentId}/homeworks:
     get:
       tags:
         - Students
@@ -891,7 +891,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /students/f0c784ef-6511-4567-8cab-1a442416baa5/marks:
+  /students/{studentId}/marks:
     get:
       tags:
         - Students
@@ -903,7 +903,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /students/f0c784ef-6511-4567-8cab-1a442416baa5/addresses:
+  /students/{studentId}/addresses:
     get:
       tags:
         - Students
@@ -915,7 +915,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /students/f0c784ef-6511-4567-8cab-1a442416baa5/profile:
+  /students/{studentId}/profile:
     get:
       tags:
         - Students
@@ -927,7 +927,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /students/0034eabc-0aaa-4a34-9191-6627dd31e5fc/attendance:
+  /students/{studentId}/attendance:
     get:
       tags:
         - Students
@@ -939,7 +939,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /students/0034eabc-0aaa-4a34-9191-6627dd31e5fc:
+  /students/{studentId}:
     get:
       tags:
         - Students
@@ -963,7 +963,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /students/f0c784ef-6511-4567-8cab-1a442416baa5/group:
+  /students/{studentId}/group:
     get:
       tags:
         - Students
@@ -1028,7 +1028,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /rooms/07fe9956-7387-4036-be68-1c58beb08927:
+  /rooms/{roomId}:
     get:
       tags:
         - Room
@@ -1040,7 +1040,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /rooms/07fe9956-7387-4036-be68-1c58beb08927/lessons:
+  /rooms/{roomId}/lessons:
     get:
       tags:
         - Room
@@ -1052,7 +1052,6 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /rooms/832b73bc-6534-44c1-b0c9-b3cca1d5496a:
     put:
       tags:
         - Room
@@ -1073,7 +1072,6 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /rooms/99cae31f-a19d-4da3-a7a4-a41f3606672f:
     delete:
       tags:
         - Room
@@ -1117,7 +1115,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /subjects/22fe8b17-dd62-460c-9615-80a18ae7f7c4:
+  /subjects/{subjectId}:
     get:
       tags:
         - Subject
@@ -1129,7 +1127,6 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /subjects/fd4076a0-8127-4b23-9e79-352d65f2bcfb:
     put:
       tags:
         - Subject
@@ -1150,7 +1147,6 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /subjects/8da28258-9042-434c-91a5-c7ae94a16ecf:
     delete:
       tags:
         - Subject
@@ -1174,7 +1170,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /teachers/07533bce-f01f-48a2-a7a7-ca553e9dc18f:
+  /teachers/{teacherId}:
     get:
       tags:
         - Teacher
@@ -1186,7 +1182,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /teachers/07533bce-f01f-48a2-a7a7-ca553e9dc18f/homeworks:
+  /teachers/{teacherId}/homeworks:
     get:
       tags:
         - Teacher
@@ -1198,7 +1194,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /teachers/07533bce-f01f-48a2-a7a7-ca553e9dc18f/marks:
+  /teachers/{teacherId}/marks:
     get:
       tags:
         - Teacher
@@ -1210,7 +1206,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /teachers/07533bce-f01f-48a2-a7a7-ca553e9dc18f/addresses:
+  /teachers/{teacherId}/addresses:
     get:
       tags:
         - Teacher
@@ -1222,7 +1218,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /teachers/07533bce-f01f-48a2-a7a7-ca553e9dc18f/profile:
+  /teachers/{teacherId}/profile:
     get:
       tags:
         - Teacher
@@ -1280,7 +1276,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /users/001ebf15-0d20-409a-aa1f-4afec1a6f852:
+  /users/{userId}:
     get:
       tags:
         - User
@@ -1292,7 +1288,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /users/9c18b506-5227-4c8f-85dd-8325110b9bee/addresses:
+  /users/{userId}/addresses:
     get:
       tags:
         - User
@@ -1304,7 +1300,7 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /users/9c18b506-5227-4c8f-85dd-8325110b9bee/profile:
+  /users/{userId}/profile:
     get:
       tags:
         - User
@@ -1316,7 +1312,6 @@ paths:
           description: ""
           headers: {}
       deprecated: false
-  /users/797390fe-cab7-4b54-9e1b-29133b788257:
     delete:
       tags:
         - User
